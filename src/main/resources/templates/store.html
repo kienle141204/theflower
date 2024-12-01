@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- style -->
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <!-- link icon -->
+    <link rel="stylesheet" href="/font/bootstrap-icons.min.css">
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="/style.css">
+
+    <title>Document</title>
+</head>
+<body>
+<div class="div0">
+    <p>
+        Order
+        <strong>before 1pm</strong>
+        for same day delivery!
+    </p>
+</div>
+
+<div th:insert="navbar :: navbar"></div>
+
+<!-- header -->
+<div>
+    <ul class="pt-5 pb-5 list-unstyled color-custom text-white mb-0">
+        <li class="text-center display-4 text-header">
+            Our Stores
+        </li>
+    </ul>
+</div>
+<!-- end header -->
+
+<!-- Section với hình ảnh chạm mép trái -->
+<div class="container-fluid full-width-container">
+    <div class="row g-0">
+        <!-- Phần hình ảnh bên trái -->
+        <div class="col-md-6 p-0">
+            <div class="image-container">
+                <img src="/image/store1.jpg" alt="Flower Shop Background"> <!-- Đường dẫn tới ảnh nền -->
+            </div>
+        </div>
+
+        <!-- Phần thông tin bên phải -->
+        <div class="col-md-6 p-4 d-flex flex-column justify-content-center">
+            <div class="logo mx-auto"></div>
+            <h1 class="text-center">The Flower Hutt</h1>
+            <div class="info text-center">
+                <p>199A Hutt St, Adelaide, South Australia</p>
+                <p>Open 7am – 6pm</p>
+                <p>7 Days a Week</p>
+                <p>+61 (8) 8223-6143</p>
+            </div>
+            <div class="text-center">
+                <a href="#" class="button">Get Directions</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Section với hình ảnh bên phải chạm mép phai -->
+<div class="container-fluid full-width-container">
+    <div class="row g-0 flex-column flex-md-row"> <!-- Sử dụng flex-column cho màn hình nhỏ và flex-md-row cho màn hình lớn -->
+        <!-- Phần thông tin bên trái cho màn hình lớn -->
+        <div class="col-md-6 p-4 d-flex flex-column justify-content-center order-1 order-md-0"> <!-- Đặt thứ tự cho phần thông tin -->
+            <div class="logo mx-auto"></div>
+            <h1 class="text-center">The Flower Hutt</h1>
+            <div class="info text-center">
+                <p>199A Hutt St, Adelaide, South Australia</p>
+                <p>Open 7am – 6pm</p>
+                <p>7 Days a Week</p>
+                <p>+61 (8) 8223-6143</p>
+            </div>
+            <div class="text-center">
+                <a href="#" class="button">Get Directions</a>
+            </div>
+        </div>
+
+        <!-- Phần hình ảnh bên phải cho màn hình lớn -->
+        <div class="col-md-6 p-0 order-0 order-md-1"> <!-- Đặt thứ tự cho phần hình ảnh -->
+            <div class="image-container">
+                <img src="/image/store2.webp" alt="Flower Shop Background"> <!-- Đường dẫn tới ảnh nền -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Section với hình ảnh chạm mép trái -->
+<div class="container-fluid full-width-container">
+    <div class="row g-0">
+        <!-- Phần hình ảnh bên trái -->
+        <div class="col-md-6 p-0">
+            <div class="image-container">
+                <img src="/image/store3.jpg" alt="Flower Shop Background"> <!-- Đường dẫn tới ảnh nền -->
+            </div>
+        </div>
+
+        <!-- Phần thông tin bên phải -->
+        <div class="col-md-6 p-4 d-flex flex-column justify-content-center">
+            <div class="logo mx-auto"></div>
+            <h1 class="text-center">The Flower Hutt</h1>
+            <div class="info text-center">
+                <p>199A Hutt St, Adelaide, South Australia</p>
+                <p>Open 7am – 6pm</p>
+                <p>7 Days a Week</p>
+                <p>+61 (8) 8223-6143</p>
+            </div>
+            <div class="text-center">
+                <a href="#" class="button">Get Directions</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- footer -->
+
+<div th:insert="asset :: footer"></div>
+
+<!-- js -->
+<script src="/bootstrap.bundle.js"></script>
+</body>
+
+
+
+</html>

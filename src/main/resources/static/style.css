@@ -1,0 +1,218 @@
+body {
+    color: #D0D088;
+}
+
+.color-custom {
+    background-color: #D0D088;
+}
+
+/* Đặt màu chữ cho navbar */
+.navbar-nav .nav-link {
+    font-size: 16px;
+    font-weight: 500;
+    color: #93933e !important; /* Đặt màu chữ cho các liên kết trong navbar */
+}
+
+
+/* Đặt màu chữ cho brand logo */
+.navbar-brand {
+    color: #D0D088 !important; /* Đặt màu chữ cho thương hiệu */
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+.full-width-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-family: 'Georgia', serif;
+    font-size: 32px;
+    font-weight: normal;
+    color: #333;
+    margin: 0;
+}
+.info {
+    font-size: 16px;
+    color: #666;
+    margin: 15px 0;
+    line-height: 1.6;
+}
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    /* background-color: #a3a380; */
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+}
+/* .button:hover {
+    background-color: #91916e;
+} */
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+.bold-text {
+    font-weight: bold;
+}
+
+.text-header{
+    font-family: 'Georgia', serif;
+    font-size: 50px;
+}
+
+.navbar .nav-link {
+    font-size: 18px;               /* Điều chỉnh kích thước chữ */
+    padding: 10px 20px;            /* Tăng khoảng cách bên trong */
+    background-color: white;     /* Đặt màu nền cho nút */
+    color: white;                  /* Màu chữ */
+    border-radius: 0px;            /* Bo tròn các góc */
+    text-align: center;            /* Căn giữa nội dung */
+    text-decoration: none;         /* Xóa gạch chân mặc định */
+}
+
+.navbar .nav-link:hover {
+    /* background-color: #91916e; */
+    text-decoration: underline;    /* Hiển thị gạch chân khi hover */
+    text-underline-offset: 40px;
+}
+
+.icon-color {
+    color: #D0D088; /* Màu sắc mà bạn muốn sử dụng cho biểu tượng */
+}
+
+.btn-send {
+    width: 100%;
+    background-color: #c7c77d;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 30px;
+    border: none;
+}
+.btn-send:hover {
+    background-color: #b5b569;
+}
+.form-control {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    padding-left: 0;
+    box-shadow: none;
+}
+.form-control:focus {
+    border-color: #a0a0a0;
+    box-shadow: none;
+}
+
+/* CSS */
+.bg-contact-header {
+    background-image: url('./image/store2.webp'); /* Đường dẫn đến ảnh nền */
+    background-size: cover; /* Để ảnh phủ toàn bộ */
+    background-position: center; /* Căn giữa ảnh nền */
+    background-repeat: no-repeat; /* Không lặp lại ảnh */
+    color: white; /* Màu chữ */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* Đổ bóng để chữ dễ đọc hơn */
+    padding: 150px;
+}
+
+.footer {
+    background-size: cover;
+    background-position: center;
+    color: black;
+    background-color: #81883f;
+}
+
+.footer h5, .footer h2, .footer a {
+    font-family: Georgia, serif;
+    color: black;
+}
+
+.footer a:hover {
+    color: #ddd;
+}
+
+.footer .social-icons img {
+    width: 24px; /* Kích thước icon */
+    margin-right: 10px;
+}
+
+.footer input[type="email"] {
+    max-width: 250px;
+}
+
+.contact-section{
+    color: #333;
+    font-size: 18px;
+    font-family: Georgia, serif;
+}
+
+.div0 {
+    background-color: #aaae5a;
+    height: 36px;
+    width: 100vw;
+    top: 0vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.div0 p {
+    color: white;
+    font-size: 18px;
+    margin: 0px;
+}
+
+/* Thêm CSS cho navbar */
+.navbar-overlay {
+    position: absolute; /* Đặt navbar ở vị trí tuyệt đối */
+    top: 36px; /* Đặt navbar ở đầu màn hình */
+    left: 0;
+    right: 0;
+    z-index: 10; /* Đảm bảo navbar luôn ở trên video */
+    padding-top: 20px; /* Khoảng cách từ trên cùng */
+    padding-bottom: 20px; /* Khoảng cách từ dưới cùng */
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Đảm bảo video không che navbar */
+.div1 {
+    position: relative;
+    z-index: 1;
+}
+
+.vid {
+    width: 100%; /* Đảm bảo video phủ toàn màn hình */
+    height: 100vh; /* Chiều cao bằng chiều cao của màn hình */
+    object-fit: cover; /* Đảm bảo video lấp đầy màn hình mà không bị biến dạng */
+}
+/* Chỉnh sửa navbar link để có nền trong suốt */
+.navbar-nav .nav-link {
+    background-color: transparent;
+}
+.d-flex .nav-item .nav-link {
+    background: none;
+}
+
+.navbar-brand img {
+    width: 80%; /* Chiều rộng của logo bằng 80% chiều rộng phần chứa */
+    height: auto; /* Giữ tỷ lệ cho logo */
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: white; /* Màu chữ trắng */
+}
+
+/* Thêm hiệu ứng hover nếu cần */
+.navbar-custom .navbar-nav .nav-link:hover {
+    color: #f1f1f1; /* Màu chữ sáng hơn khi hover */
+}
