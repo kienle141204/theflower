@@ -22,6 +22,4 @@ public class ProductController {
     public List<Product> getAllProducts() {
         return productRepository.findAll(); // Lấy tất cả sản phẩm từ cơ sở dữ liệu
     }
-
-
 }

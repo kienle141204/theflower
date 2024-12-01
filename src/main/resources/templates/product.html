@@ -1,20 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết sản phẩm</title>
+    <!-- style -->
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <!-- link icon -->
+    <link rel="stylesheet" href="/font/bootstrap-icons.min.css">
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Danh sách sản phẩm</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/home.css">
 </head>
 <body>
-
-<h1>Chi tiết sản phẩm</h1>
-<div>
-    <img src="${product.imageUrl}" alt="${product.name}" />
-    <h3>${product.name}</h3>
-    <p>${product.description}</p>
-    <p>Giá: ${product.price} VND</p>
-    <button>Thêm vào giỏ hàng</button>
+<div class="notifi-mes">
+    Order <strong>before 1pm</strong> for same day delivery
 </div>
+
+<div th:insert="navbar :: navbar"></div>
+
+<div class="product-info">
+    <div class="product-view">
+        <img class="flower-img" src="/img/flower-1.jpg" />
+        <img class="flower-img" src="/img/flower-2.jpg" />
+        <img class="flower-img" src="/img/flower-3.jpg" />
+    </div>
+    <div class="product-details">
+        <h1 class="product-title">Kellie Bouquet</h1>
+        <p class="product-price">$52.00</p>
+        <div class="flower-description">
+            <div class="product-option">
+                <label for="size">Size</label>
+                <span class="selected-option">Standard</span>
+                <select id="size">
+                    <option>Standard</option>
+                    <option>Large</option>
+                </select>
+            </div>
+            <div class="product-option">
+                <label for="presentation">Paper or Vase</label>
+                <span class="selected-option">Paper</span>
+                <select id="presentation">
+                    <option>Paper</option>
+                    <option>Vase</option>
+                </select>
+            </div>
+            <div class="quantity-add">
+                <select class="quantity-select">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="flower-des-all">
+                <div class="flower-des">
+                    A small bouquet of fresh and seasonal blooms, selected by our
+                    wonderful team of florists. This posy is an all-rounder – perfect
+                    for any occasion!
+                </div>
+                <div class="flower-des">
+                    Large size pictured. Florist will choose appropriate vase to suit.
+                </div>
+                <div class="flower-des">
+                    Bouquet may vary from image as is dependent on stock availability
+                    (see our substitution policy).
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="related-product">
+    <div class="related-product-header">
+        <h2>Related Products</h2>
+    </div>
+    <div class="related-product-grid">
+        <div class="related-product-info">
+            <img src="img/related-1.jpg" class="related-product-img" />
+            <p class="related-product-name">chocolate box</p>
+            <p class="related-product-price">$25.00</p>
+        </div>
+        <div class="related-product-info">
+            <img src="img/related-1.jpg" class="related-product-img" />
+            <p class="related-product-name">chocolate box</p>
+            <p class="related-product-price">$25.00</p>
+        </div>
+        <div class="related-product-info">
+            <img src="img/related-1.jpg" class="related-product-img" />
+            <p class="related-product-name">chocolate box</p>
+            <p class="related-product-price">$25.00</p>
+        </div>
+        <div class="related-product-info">
+            <img src="img/related-1.jpg" class="related-product-img" />
+            <p class="related-product-name">chocolate box</p>
+            <p class="related-product-price">$25.00</p>
+        </div>
+    </div>
+</div>
+
+<div th:insert="asset :: footer"></div>
 
 </body>
 </html>

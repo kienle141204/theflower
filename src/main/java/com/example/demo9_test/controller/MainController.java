@@ -15,17 +15,22 @@ public class MainController
     @Autowired
     private ProductRepository productRepository;
 
-    @RequestMapping("/home")
-    public String index() {
+    @GetMapping("/home")
+    public String home() {
         return "home_page";
     }
 
-    @RequestMapping("/store")
+    @GetMapping("/shop")
+    public String shop() {
+        return "shop";
+    }
+
+    @GetMapping("/store")
     public String ourStores() {
         return "store";
     }
 
-    @RequestMapping("/contact")
+    @GetMapping("/contact")
     public String Contact() {
         return "contact_page";
     }
@@ -35,13 +40,14 @@ public class MainController
         return "test"; // Tên của view (file HTML trong thư mục templates)
     }
 
-    @GetMapping("/buy/{productId}")
+    @RequestMapping ("/buy/{productId}")
     public String showProductDetails(@PathVariable("productId") Long productId, Model model) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Sản phẩm không tồn tại"));
         model.addAttribute("product", product);
         return "product"; // Trang chi tiết sản phẩm
     }
+
 
 
 
