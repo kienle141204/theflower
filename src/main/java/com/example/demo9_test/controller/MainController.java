@@ -35,10 +35,10 @@ public class MainController
         return "contact_page";
     }
 
-    @GetMapping("/products") // Trả về trang HTML khi truy cập /products
-    public String showProductPage() {
-        return "test"; // Tên của view (file HTML trong thư mục templates)
-    }
+//    @GetMapping("/products") // Trả về trang HTML khi truy cập /products
+//    public String showProductPage() {
+//        return "test"; // Tên của view (file HTML trong thư mục templates)
+//    }
 
     @RequestMapping ("/buy/{productId}")
     public String showProductDetails(@PathVariable("productId") Long productId, Model model) {
