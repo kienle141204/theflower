@@ -23,13 +23,11 @@
 
 <div class="product-info">
     <div class="product-view">
-        <img class="flower-img" src="/img/flower-1.jpg" />
-        <img class="flower-img" src="/img/flower-2.jpg" />
-        <img class="flower-img" src="/img/flower-3.jpg" />
+        <img class="flower-img" id="product-img"/>
     </div>
     <div class="product-details">
-        <h1 class="product-title">Kellie Bouquet</h1>
-        <p class="product-price">$52.00</p>
+        <h1 class="product-title py-5" id="product-name"></h1>
+        <p class="product-price" id="product-price" style="font-size: 20px"></p>
         <div class="flower-description">
             <div class="product-option">
                 <label for="size">Size</label>
@@ -72,35 +70,61 @@
         </div>
     </div>
 </div>
-<div class="related-product">
-    <div class="related-product-header">
-        <h2>Related Products</h2>
-    </div>
-    <div class="related-product-grid">
-        <div class="related-product-info">
-            <img src="img/related-1.jpg" class="related-product-img" />
-            <p class="related-product-name">chocolate box</p>
-            <p class="related-product-price">$25.00</p>
-        </div>
-        <div class="related-product-info">
-            <img src="img/related-1.jpg" class="related-product-img" />
-            <p class="related-product-name">chocolate box</p>
-            <p class="related-product-price">$25.00</p>
-        </div>
-        <div class="related-product-info">
-            <img src="img/related-1.jpg" class="related-product-img" />
-            <p class="related-product-name">chocolate box</p>
-            <p class="related-product-price">$25.00</p>
-        </div>
-        <div class="related-product-info">
-            <img src="img/related-1.jpg" class="related-product-img" />
-            <p class="related-product-name">chocolate box</p>
-            <p class="related-product-price">$25.00</p>
-        </div>
-    </div>
-</div>
+<!--<div class="related-product">-->
+<!--    <div class="related-product-header">-->
+<!--        <h2>Related Products</h2>-->
+<!--    </div>-->
+<!--    <div class="related-product-grid">-->
+<!--        <div class="related-product-info">-->
+<!--            <img src="img/related-1.jpg" class="related-product-img" />-->
+<!--            <p class="related-product-name">chocolate box</p>-->
+<!--            <p class="related-product-price">$25.00</p>-->
+<!--        </div>-->
+<!--        <div class="related-product-info">-->
+<!--            <img src="img/related-1.jpg" class="related-product-img" />-->
+<!--            <p class="related-product-name">chocolate box</p>-->
+<!--            <p class="related-product-price">$25.00</p>-->
+<!--        </div>-->
+<!--        <div class="related-product-info">-->
+<!--            <img src="img/related-1.jpg" class="related-product-img" />-->
+<!--            <p class="related-product-name">chocolate box</p>-->
+<!--            <p class="related-product-price">$25.00</p>-->
+<!--        </div>-->
+<!--        <div class="related-product-info">-->
+<!--            <img src="img/related-1.jpg" class="related-product-img" />-->
+<!--            <p class="related-product-name">chocolate box</p>-->
+<!--            <p class="related-product-price">$25.00</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div th:insert="asset :: footer"></div>
 
+<script >
+    const path = window.location.pathname;
+    const  parts = path.split("/");
+
+    const productId = parts[parts.length - 1];
+
+    fetch(`/api/products/${productId}`)
+        .then(response => {
+            if(!response.ok){
+                throw new Error("loi");
+            }
+            return response.json();
+        })
+        .then(product =>{
+            document.getElementById("product-img").src = product.imageUrl;
+            document.getElementById("product-name").textContent = product.name;
+            document.getElementById("product-price").textContent = `${product.price.toLocaleString('vi-VN')} VND`;
+
+        })
+        .catch(error =>{
+            console.log("loi", error);
+        });
+
+</script>
+
 </body>
 </html>
+
