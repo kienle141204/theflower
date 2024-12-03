@@ -21,16 +21,20 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
-    @GetMapping("/api/products") // Endpoint để lấy dữ liệu sản phẩm
+    @GetMapping("/api/products")
     public List<Product> getAllProducts() {
-        return productRepository.findAll(); // Lấy tất cả sản phẩm từ cơ sở dữ liệu
+        return productRepository.findAll();
     }
 
     @GetMapping("/api/products/{productId}")
     public ResponseEntity<Product> getProductById(@PathVariable("productId") Long productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("loi"));
+
+        // Chuyển đổi xuống dòng thành HTML nếu cần
+        product.setDescription(product.getDescription().replace("\n", "<br>"));
         return ResponseEntity.ok(product);
     }
+
 
 }

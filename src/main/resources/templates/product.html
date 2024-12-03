@@ -53,19 +53,7 @@
                     </select>
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
-                <div class="flower-des-all">
-                    <div class="flower-des">
-                        A small bouquet of fresh and seasonal blooms, selected by our
-                        wonderful team of florists. This posy is an all-rounder – perfect
-                        for any occasion!
-                    </div>
-                    <div class="flower-des">
-                        Large size pictured. Florist will choose appropriate vase to suit.
-                    </div>
-                    <div class="flower-des">
-                        Bouquet may vary from image as is dependent on stock availability
-                        (see our substitution policy).
-                    </div>
+                <div id="product-des" class="my-5">
                 </div>
         </div>
     </div>
@@ -90,7 +78,10 @@
             document.getElementById("product-img").src = product.imageUrl;
             document.getElementById("product-name").textContent = product.name;
             document.getElementById("product-price").textContent = `${product.price.toLocaleString('vi-VN')} VND`;
-
+            // Thay đổi mô tả để hỗ trợ xuống dòng
+            const formattedDescription = product.description.replace(/\n/g, "<br>");
+            document.getElementById("product-des").innerHTML = formattedDescription;
+        
         })
         .catch(error =>{
             console.log("loi", error);

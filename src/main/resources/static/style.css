@@ -212,7 +212,14 @@ h1 {
 .navbar-custom .navbar-nav .nav-link:hover {
     color: #f1f1f1; /* Màu chữ sáng hơn khi hover */
 }
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    background-color: #D0D088;
+}
 
+.dropdown-menu {
+    margin-top: 0;
+}
 
 
 /* style cua dung */

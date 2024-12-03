@@ -20,10 +20,12 @@ public class MainController
         return "home_page";
     }
 
-    @GetMapping("/shop")
+    @GetMapping({"/shop", "/shop/plants", "/shop/mixed_bouquets", "/shop/christmas", "/shop/one_of_aKind", "/shop/seasonal", "/shop/special_occasion", "/shop/food_drinks"})
     public String shop() {
         return "shop";
     }
+
+
 
     @GetMapping("/store")
     public String ourStores() {

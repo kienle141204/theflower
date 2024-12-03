@@ -30,8 +30,7 @@
 <!-- header -->
 <div>
     <ul class="pt-5 pb-5 list-unstyled color-custom text-white mb-0">
-        <li class="text-center display-4 text-header">
-            Shop
+        <li class="text-center display-4 text-header" id="text-header">
         </li>
     </ul>
 </div>
@@ -46,24 +45,58 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        fetch('/api/products') // Gửi yêu cầu đến API
+        const currentPath = window.location.pathname;
+        let apiUrl;
+        let text_header = 'Shop';
+
+        if (currentPath === "/shop/plants") {
+            apiUrl = '/api/products/plants';
+            text_header = 'Plants';
+        } else if (currentPath === "/shop/mixed_bouquets") {
+            apiUrl = '/api/products/mixed_bouquets';
+            text_header = 'Mixed Bouquets';
+        } else if (currentPath === "/shop/christmas") {
+            apiUrl = '/api/products/christmas';
+            text_header = 'Christmas';
+        } else if (currentPath === "/shop/one_of_aKind") {
+            apiUrl = '/api/products/one_of_aKind';
+            text_header = 'One Of A Kind';
+        } else if (currentPath === "/shop/seasonal") {
+            apiUrl = '/api/products/seasonal';
+            text_header = 'Seasonal Bouquets';
+        } else if (currentPath === "/shop/special_occasion") {
+            apiUrl = '/api/products/special_occasion';
+            text_header = 'Special Occasion';
+        } else if (currentPath === "/shop/food_drinks") {
+            apiUrl = '/api/products/food_drinks';
+            text_header = 'Food And Drinks';
+        } else {
+            apiUrl = '/api/products';
+        }
+
+        // Gửi yêu cầu đến API
+        fetch(apiUrl)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Mạng bị lỗi!');
                 }
-                return response.json(); // Chuyển đổi phản hồi sang định dạng JSON
+                return response.json();
             })
             .then(products => {
                 const container = document.getElementById('product-container');
 
+                // Cập nhật text header
+                document.getElementById('text-header').textContent = text_header;
+
+                // Thêm các sản phẩm vào container
                 products
                     .filter(product => product.imageUrl && product.imageUrl.trim() !== '')
                     .forEach(product => {
-                    const productCard = document.createElement('div');
-                    productCard.classList.add('col-md-4', 'mb-4'); // Bootstrap: Chiếm 4 cột, cách đều nhau
-                    productCard.innerHTML = `
-                        <div class="card h-100 shadow-sm""> <!-- Bootstrap card -->
-                            <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}"> <!-- Ảnh sản phẩm -->
+                        const productCard = document.createElement('div');
+                        productCard.classList.add('col-md-4', 'mb-4');
+                        productCard.innerHTML = `
+                        <div class="card h-100 shadow-sm"> <!-- Bootstrap card -->
+                            <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
                             <div class="card-body">
                                 <h5 class="card-title">${product.name}</h5>
                                 <p class="card-text">${product.price.toLocaleString('vi-VN')} VND</p>
@@ -73,12 +106,12 @@
                             </div>
                         </div>
                     `;
-                    // Thêm sự kiện click vào nút "Mua ngay"
-                    productCard.querySelector('.btn').addEventListener('click', function () {
-                        window.location.href = `/buy/${product.id}`; // Dùng ID sản phẩm để chuyển hướng
+
+                        productCard.querySelector('.btn').addEventListener('click', function () {
+                            window.location.href = `/buy/${product.id}`;
+                        });
+                        container.appendChild(productCard);
                     });
-                    container.appendChild(productCard);
-                });
             })
             .catch(error => {
                 console.error('Lỗi khi tải dữ liệu sản phẩm:', error);
