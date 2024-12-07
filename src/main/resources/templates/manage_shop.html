@@ -17,14 +17,6 @@
 </head>
 <body>
 
-<div class="div0">
-    <p>
-        Order
-        <strong>before 1pm</strong>
-        for same day delivery!
-    </p>
-</div>
-
 <!--<div th:insert="navbar :: navbar"></div>-->
 
 <!-- header -->
@@ -40,7 +32,7 @@
     <div class="border border-dark rounded p-5 my-5">
         <div class="row">
             <div class="col-md-8">
-                <div class="mb-5" style="color: black; font-size: 30px; font-family: Georgia, serif;">Sale Out</div>
+                <div class="mb-5" style="color: black; font-size: 30px; font-family: Arial, serif;">Bán hết</div>
                 <label for="name_out" class="form-label visually-hidden">Product's name</label>
                 <input type="text" class="form-control w-75" id="name_out" name="name" required placeholder="Product's name">
             </div>
@@ -54,7 +46,7 @@
     <div class="border border-dark rounded p-5 my-5">
         <div class="row">
             <div class="col-md-8">
-                <div class="mb-5" style="color: black; font-size: 30px; font-family: Georgia, serif;">on Stock</div>
+                <div class="mb-5" style="color: black; font-size: 30px; font-family: Arial, serif;">Mở bán</div>
                 <label for="name_on" class="form-label visually-hidden">Product's name</label>
                 <input type="text" class="form-control w-75" id="name_on" name="name" required placeholder="Product's name">
             </div>
@@ -68,7 +60,7 @@
     <div class="border border-dark rounded p-5 my-5">
         <div class="row">
             <div class="col-md-8">
-                <div class="mb-5" style="color: black; font-size: 30px; font-family: Georgia, serif;">Delete</div>
+                <div class="mb-5" style="color: black; font-size: 30px; font-family: Arial, serif;">Xóa sản phẩm</div>
                 <label for="name_out" class="form-label visually-hidden">Product's name</label>
                 <input type="text" class="form-control w-75" id="name_del" name="name" required placeholder="Product's name">
             </div>
@@ -201,7 +193,7 @@
                     `;
 
                             productCard.querySelector('.btn').addEventListener('click', function () {
-                                window.location.href = `/buy/${product.id}`;
+                                window.location.href = `/api/manage_00112299/${product.id}`;
                             });
                         }
                         else{
