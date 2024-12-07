@@ -37,6 +37,11 @@ public class MainController
         return "contact_page";
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
+
 //    @GetMapping("/products") // Trả về trang HTML khi truy cập /products
 //    public String showProductPage() {
 //        return "test"; // Tên của view (file HTML trong thư mục templates)

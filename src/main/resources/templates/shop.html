@@ -94,22 +94,38 @@
                     .forEach(product => {
                         const productCard = document.createElement('div');
                         productCard.classList.add('col-md-4', 'mb-4');
-                        productCard.innerHTML = `
-                        <div class="card h-100 shadow-sm"> <!-- Bootstrap card -->
-                            <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
-                            <div class="card-body">
-                                <h5 class="card-title">${product.name}</h5>
-                                <p class="card-text">${product.price.toLocaleString('vi-VN')} VND</p>
-                            </div>
-                            <div class="card-footer bg-white">
-                                <button class="btn w-100" style="background-color: #b5b569">Quick Add</button>
-                            </div>
-                        </div>
+                        if(product.quantity > 0){
+                            productCard.innerHTML = `
+                                <div class="card h-100 shadow-sm"> <!-- Bootstrap card -->
+                                    <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${product.name}</h5>
+                                        <p class="card-text">${product.price.toLocaleString('vi-VN')} VND</p>
+                                    </div>
+                                    <div class="card-footer bg-white">
+                                        <button class="btn w-100" style="background-color: #b5b569">Quick Add</button>
+                                    </div>
+                                </div>
                     `;
 
-                        productCard.querySelector('.btn').addEventListener('click', function () {
-                            window.location.href = `/buy/${product.id}`;
-                        });
+                            productCard.querySelector('.btn').addEventListener('click', function () {
+                                window.location.href = `/buy/${product.id}`;
+                            });
+                        }
+                        else{
+                            productCard.innerHTML = `
+                                <div class="card h-100 shadow-sm"> <!-- Bootstrap card -->
+                                    <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${product.name}</h5>
+                                        <p class="card-text">${product.price.toLocaleString('vi-VN')} VND</p>
+                                    </div>
+                                    <div class="card-footer bg-white">
+                                        <button class="btn w-100 btn-disabled" disabled style="background-color: #ccc; color: #fff;">Sale Out</button>
+                                    </div>
+                                </div>
+                    `;
+                        }
                         container.appendChild(productCard);
                     });
             })
@@ -120,6 +136,9 @@
 </script>
 
 <div th:insert="asset :: footer"></div>
+
+<!-- js -->
+<script src="/bootstrap.bundle.js"></script>
 
 </body>
 </html>

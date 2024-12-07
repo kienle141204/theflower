@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- style -->
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <!-- link icon -->
+    <link rel="stylesheet" href="/font/bootstrap-icons.min.css">
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Shop</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/home.css">
+
+</head>
+<body>
+
+<div class="div0">
+    <p>
+        Order
+        <strong>before 1pm</strong>
+        for same day delivery!
+    </p>
+</div>
+
+<!--<div th:insert="navbar :: navbar"></div>-->
+
+<!-- header -->
+<div>
+    <ul class="pt-5 pb-5 list-unstyled color-custom text-white mb-0">
+        <li class="text-center display-4 text-header" id="text-header">
+        </li>
+    </ul>
+</div>
+
+
+<div class="container my-5 ">
+    <div class="border border-dark rounded p-5 my-5">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="mb-5" style="color: black; font-size: 30px; font-family: Georgia, serif;">Sale Out</div>
+                <label for="name_out" class="form-label visually-hidden">Product's name</label>
+                <input type="text" class="form-control w-75" id="name_out" name="name" required placeholder="Product's name">
+            </div>
+
+            <div class="col-md-4 d-flex align-items-center">
+                <button class="btn btn-primary w-100" type="button" id="sale_out">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="border border-dark rounded p-5 my-5">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="mb-5" style="color: black; font-size: 30px; font-family: Georgia, serif;">on Stock</div>
+                <label for="name_on" class="form-label visually-hidden">Product's name</label>
+                <input type="text" class="form-control w-75" id="name_on" name="name" required placeholder="Product's name">
+            </div>
+
+            <div class="col-md-4 d-flex align-items-center">
+                <button class="btn btn-primary w-100" type="button" id="on_stock">Submit</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- end header -->
+
+<div class="my-5 mx-5">
+    <div class="row">
+        <!-- Các sản phẩm sẽ được thêm vào đây -->
+        <div id="product-container" class="row"></div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('sale_out').addEventListener('click', function () {
+        // Lấy giá trị từ thẻ input
+        const name = document.getElementById('name_out').value;
+
+        if (!name) {
+            alert('Vui lòng nhập tên sản phẩm!');
+            return;
+        }
+
+        // Thay thế {name} trong URL bằng giá trị từ biến name
+        fetch(`/api/products/sale_out/${encodeURIComponent(name)}`)
+            .then((response) => {
+                if (response.ok) {
+                    alert('Gửi thành công!');
+                    window.location.reload();
+                } else {
+                    alert('Có lỗi xảy ra! Vui lòng thử lại.');
+                }
+            })
+            .catch((error) => {
+                alert('Lỗi khi gửi dữ liệu: ' + error.message);
+            });
+    });
+
+    document.getElementById('on_stock').addEventListener('click', function () {
+        // Lấy giá trị từ thẻ input
+        const name = document.getElementById('name_on').value;
+
+        if (!name) {
+            alert('Vui lòng nhập tên sản phẩm!');
+            return;
+        }
+
+        // Thay thế {name} trong URL bằng giá trị từ biến name
+        fetch(`/api/products/re_stock/${encodeURIComponent(name)}`)
+            .then((response) => {
+                if (response.ok) {
+                    alert('Gửi thành công!');
+                    window.location.reload();
+                } else {
+                    alert('Có lỗi xảy ra! Vui lòng thử lại.');
+                }
+            })
+            .catch((error) => {
+                alert('Lỗi khi gửi dữ liệu: ' + error.message);
+            });
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const currentPath = window.location.pathname;
+        let apiUrl;
+        let text_header = 'store management';
+        apiUrl = '/api/products';
+
+        // Gửi yêu cầu đến API
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Mạng bị lỗi!');
+                }
+                return response.json();
+            })
+            .then(products => {
+                const container = document.getElementById('product-container');
+
+                // Cập nhật text header
+                document.getElementById('text-header').textContent = text_header;
+
+                // Thêm các sản phẩm vào container
+                products
+                    .filter(product => product.imageUrl && product.imageUrl.trim() !== '')
+                    .forEach(product => {
+                        const productCard = document.createElement('div');
+                        productCard.classList.add('col-md-2', 'mb-2');
+                        if(product.quantity > 0){
+                            productCard.innerHTML = `
+                                <div class="card h-100 shadow-sm"> <!-- Bootstrap card -->
+                                    <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${product.name}</h5>
+                                        <p class="card-text">${product.price.toLocaleString('vi-VN')} VND</p>
+                                    </div>
+                                    <div class="card-footer bg-white">
+                                        <button class="btn w-100" style="background-color: #b5b569">Stock</button>
+                                    </div>
+                                </div>
+                    `;
+
+                            productCard.querySelector('.btn').addEventListener('click', function () {
+                                window.location.href = `/buy/${product.id}`;
+                            });
+                        }
+                        else{
+                            productCard.innerHTML = `
+                                <div class="card h-100 shadow-sm"> <!-- Bootstrap card -->
+                                    <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${product.name}</h5>
+                                        <p class="card-text">${product.price.toLocaleString('vi-VN')} VND</p>
+                                    </div>
+                                    <div class="card-footer bg-white">
+                                        <button class="btn w-100 btn-disabled" disabled style="background-color: #ccc; color: #fff;">Sale Out</button>
+                                    </div>
+                                </div>
+                    `;
+                        }
+                        container.appendChild(productCard);
+                    });
+            })
+            .catch(error => {
+                console.error('Lỗi khi tải dữ liệu sản phẩm:', error);
+            });
+    });
+</script>
+
+<div th:insert="asset :: footer"></div>
+
+<!-- js -->
+<script src="/bootstrap.bundle.js"></script>
+
+</body>
+</html>

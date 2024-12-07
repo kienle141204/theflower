@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "shop_all")
+@Table(name = "products")
 public class Product {
 
     @Id
@@ -24,13 +24,19 @@ public class Product {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "quantity")
+    private Integer quantity;
+
     // Constructors
     public Product() {}
 
     public Product(String name, String description, Double price, String imageUrl,
-                   Integer stockQuantity, String category, LocalDateTime createdAt, LocalDateTime updatedAt) {
+                   int quantity) {
         this.name = name;
         this.price = price;
+        this.imageUrl = imageUrl;
+        this.description = description;
+        this.quantity = quantity;
     }
 
     // Getters và Setters
@@ -72,6 +78,12 @@ public class Product {
         this.description = description;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 
     @Override
     public String toString() {
@@ -81,6 +93,7 @@ public class Product {
                 ", price=" + price +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", description='" + description + '\'' +
+                ", quantity=" + quantity +
                 '}';
     }
 }
