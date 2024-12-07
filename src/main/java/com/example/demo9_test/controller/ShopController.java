@@ -66,23 +66,23 @@ public class ShopController {
         return shopRepository.getDataFoodDrinks();
     }
 
-    @GetMapping("/sale_out/{name}")
-    public List<Product> saleOutProduct(@PathVariable String name) {
-        shopRepository.saleOutProduct(name);
-        return shopRepository.findAll();
-    }
-
-    @GetMapping("/re_stock/{name}")
-    public List<Product> reStockProduct(@PathVariable String name) {
-        shopRepository.reStockProduct(name);
-        return shopRepository.findAll();
-    }
-
-    @GetMapping("/delete/{name}")
-    public List<Product> deleteProduct(@PathVariable String name) {
-        shopRepository.deleteProduct(name);
-        return shopRepository.findAll();
-    }
+//    @GetMapping("/sale_out/{name}")
+//    public List<Product> saleOutProduct(@PathVariable String name) {
+//        shopRepository.saleOutProduct(name);
+//        return shopRepository.findAll();
+//    }
+//
+//    @GetMapping("/re_stock/{name}")
+//    public List<Product> reStockProduct(@PathVariable String name) {
+//        shopRepository.reStockProduct(name);
+//        return shopRepository.findAll();
+//    }
+//
+//    @GetMapping("/delete/{name}")
+//    public List<Product> deleteProduct(@PathVariable String name) {
+//        shopRepository.deleteProduct(name);
+//        return shopRepository.findAll();
+//    }
 
 }
 

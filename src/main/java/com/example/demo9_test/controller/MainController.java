@@ -40,10 +40,10 @@ public class MainController
 
 
 
-//    @GetMapping("/products") // Trả về trang HTML khi truy cập /products
-//    public String showProductPage() {
-//        return "test"; // Tên của view (file HTML trong thư mục templates)
-//    }
+    @GetMapping("/test") // Trả về trang HTML khi truy cập /products
+    public String test() {
+        return "test"; // Tên của view (file HTML trong thư mục templates)
+    }
 
     @GetMapping ("/buy/{productId}")
     public String showProductDetails(@PathVariable("productId") Long productId, Model model) {
@@ -53,13 +53,6 @@ public class MainController
         return "product"; // Trang chi tiết sản phẩm
     }
 
-//    @RequestMapping ("/buy/test1/{productId}")
-//    public String test2(@PathVariable("productId") Long productId, Model model) {
-//        Product product = productRepository.findById(productId)
-//                .orElseThrow(() -> new RuntimeException("Sản phẩm không tồn tại"));
-//        model.addAttribute("manage_product", product);
-//        return "manage_product";
-//    }
 
 
 

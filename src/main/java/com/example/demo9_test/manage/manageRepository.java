@@ -19,4 +19,9 @@ public class manageRepository {
         jdbcTemplate.update(sql, description, price, id);
     }
 
+    public void add(String name, String description, int price, String image_url) {
+        String sql = "insert into products (name, description, price, image_url, quantity) values (?, ?, ?, ?,1)";
+        jdbcTemplate.update(sql, name, description, price, image_url);
+    }
+
 }

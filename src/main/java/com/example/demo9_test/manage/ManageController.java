@@ -15,8 +15,13 @@ public class ManageController {
     private ProductRepository productRepository;
 
     @GetMapping("/api/manage_00112299")
-    public String shopMange() {
+    public String shopManage() {
         return "manage_shop";
+    }
+
+    @GetMapping("/api/manage_00112299/add")
+    public String addProduct() {
+        return "manage_addProduct";
     }
 
     @GetMapping("/api/manage_00112299/{productId}")
