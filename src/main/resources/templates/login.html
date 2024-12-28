@@ -5,43 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <style>
-      /* Đặt nền và căn giữa nội dung */
       body {
         font-family: Arial, sans-serif;
-        background-color: #ffffff; /* Màu nền tối giống navbar */
-        color: #ffffff; /* Màu chữ trắng */
+        background-color: #ffffff;
+        color: #ffffff;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        height: 90vh;
         margin: 0;
         flex-direction: column;
       }
 
       .logo {
-        margin-bottom: 20px; /* Khoảng cách giữa logo và login-container */
+        margin-bottom: 20px;
         text-align: center;
       }
 
       .logo img {
-        width: 250px; /* Set chiều rộng logo */
+        width: 250px;
         height: auto;
       }
 
       /* Khung đăng nhập */
       .login-container {
-        background: #b5b569; /* Màu nền xám tối giống menu */
+        background: #b5b569;
         padding: 20px 30px;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(91, 91, 91, 0.2);
-        width: 450px;
+        width: 350px;
       }
 
       /* Tiêu đề */
       .login-container h1 {
         text-align: center;
-        margin-bottom: 30px;
-        font-size: 36px;
+        margin-bottom: 20px;
+        font-size: 30px;
         color: #ffffff;
       }
 
@@ -53,53 +52,49 @@
 
       /* Các trường nhập liệu */
       .login-container input {
-        margin-bottom: 20px;
-        padding: 15px;
-        font-size: 18px;
-        border: 1px solid #ffffff; /* Màu viền nhạt */
+        margin-bottom: 15px;
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid #ffffff;
         border-radius: 4px;
-        background-color: #ffffff; /* Màu nền tối */
-        color: #000000; /* Màu chữ trắng */
+        background-color: #ffffff;
+        color: #000000;
       }
 
-      /* Khi hover vào trường nhập liệu */
       .login-container input:focus {
-        border-color: #b5b569; /* Màu viền nhấn mạnh */
+        border-color: #b5b569;
         outline: none;
       }
 
       /* Nút đăng nhập */
       .login-container button {
-        padding: 15px;
-        font-size: 18px;
-        background-color: #484848; /* Màu xanh lá nhạt giống "Quick Add" */
-        color: #ffffff; /* Màu chữ tối */
+        padding: 12px;
+        font-size: 16px;
+        background-color: #484848;
+        color: #ffffff;
         border: none;
-        border-radius: 6px;
+        border-radius: 4px;
         cursor: pointer;
       }
 
-      /* Khi hover vào nút */
       .login-container button:hover {
-        background-color: #323232; /* Màu xanh lá đậm hơn */
+        background-color: #323232;
       }
 
-      /* Thông báo lỗi */
       .login-container .error {
-        color: #ff4d4d; /* Màu đỏ nhấn mạnh */
-        font-size: 16px;
+        color: #ff4d4d;
+        font-size: 14px;
         text-align: center;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
       }
 
-      /* Liên kết đăng ký và quên mật khẩu */
       .login-container .register-link {
         text-align: center;
-        margin-top: 20px;
+        margin-top: 10px;
       }
 
       .login-container .register-link a {
-        color: #ffffff; /* Màu xanh lá nhạt */
+        color: #ffffff;
         text-decoration: none;
       }
 
