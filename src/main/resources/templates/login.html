@@ -1,117 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-container {
-            background: #fff;
-            padding: 20px 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-        .login-container h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #333;
-        }
-        .login-container form {
-            display: flex;
-            flex-direction: column;
-        }
-        .login-container input {
-            margin-bottom: 15px;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .login-container button {
-            padding: 10px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .login-container button:hover {
-            background-color: #0056b3;
-        }
-        .login-container .error {
-            color: red;
-            font-size: 14px;
-            text-align: center;
-            margin-bottom: 10px;
-        }
+      /* Đặt nền và căn giữa nội dung */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff; /* Màu nền tối giống navbar */
+        color: #ffffff; /* Màu chữ trắng */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        flex-direction: column;
+      }
+
+      .logo {
+        margin-bottom: 20px; /* Khoảng cách giữa logo và login-container */
+        text-align: center;
+      }
+
+      .logo img {
+        width: 250px; /* Set chiều rộng logo */
+        height: auto;
+      }
+
+      /* Khung đăng nhập */
+      .login-container {
+        background: #b5b569; /* Màu nền xám tối giống menu */
+        padding: 20px 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(91, 91, 91, 0.2);
+        width: 450px;
+      }
+
+      /* Tiêu đề */
+      .login-container h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 36px;
+        color: #ffffff;
+      }
+
+      /* Form */
+      .login-container form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Các trường nhập liệu */
+      .login-container input {
+        margin-bottom: 20px;
+        padding: 15px;
+        font-size: 18px;
+        border: 1px solid #ffffff; /* Màu viền nhạt */
+        border-radius: 4px;
+        background-color: #ffffff; /* Màu nền tối */
+        color: #000000; /* Màu chữ trắng */
+      }
+
+      /* Khi hover vào trường nhập liệu */
+      .login-container input:focus {
+        border-color: #b5b569; /* Màu viền nhấn mạnh */
+        outline: none;
+      }
+
+      /* Nút đăng nhập */
+      .login-container button {
+        padding: 15px;
+        font-size: 18px;
+        background-color: #484848; /* Màu xanh lá nhạt giống "Quick Add" */
+        color: #ffffff; /* Màu chữ tối */
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      /* Khi hover vào nút */
+      .login-container button:hover {
+        background-color: #323232; /* Màu xanh lá đậm hơn */
+      }
+
+      /* Thông báo lỗi */
+      .login-container .error {
+        color: #ff4d4d; /* Màu đỏ nhấn mạnh */
+        font-size: 16px;
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      /* Liên kết đăng ký và quên mật khẩu */
+      .login-container .register-link {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .login-container .register-link a {
+        color: #ffffff; /* Màu xanh lá nhạt */
+        text-decoration: none;
+      }
+
+      .login-container .register-link a:hover {
+        text-decoration: underline;
+      }
     </style>
-</head>
-<body>
-<div class="login-container">
-    <h1>Login</h1>
-    <form>
+  </head>
+  <body>
+    <div class="logo">
+      <img
+        src="/theflowershop/src/main/resources/static/image/logo_1.png"
+        alt="Your Logo"
+      />
+    </div>
+    <div class="login-container">
+      <h1>Login</h1>
+      <form>
         <div class="error" id="error-message"></div>
-        <input type="email" name="email" placeholder="Email" id="email">
-        <input type="password" name="password" placeholder="Password" id="password">
+        <input type="email" name="email" placeholder="Email" id="email" />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          id="password"
+        />
         <button type="submit" id="login">Login</button>
-    </form>
-    <div class="register-link">
+      </form>
+      <div class="register-link">
         <p>Don't have an account? <a href="/register">Sign up here</a></p>
-    </div>
-    <div class="register-link">
+      </div>
+      <div class="register-link">
         <p><a href="/forgot-pw">Forgot your password?</a></p>
+      </div>
     </div>
-</div>
 
-<script>
+    <script>
+      document
+        .getElementById("login")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
 
-    document.getElementById('login').addEventListener('click', function (event){
-        event.preventDefault();
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-
-        if(!email){
+          if (!email) {
             alert("Vui lòng nhập email!!!");
             return;
-        }
-        else if(!password){
+          } else if (!password) {
             alert("Vui lòng nhập mật khẩu!!!");
             return;
-        }
-        const formData = new FormData();
-        formData.append("email", email);
-        formData.append("password", password);
+          }
+          const formData = new FormData();
+          formData.append("email", email);
+          formData.append("password", password);
 
-        fetch("/api/check_login",{
+          fetch("/api/check_login", {
             method: "POST",
             body: formData,
-        })
-            .then(response => response.json()) // Chuyển đổi phản hồi thành JSON
-            .then(data => {
-                if(data != 0){
-                    alert("Đăng nhập thành công");
-                    window.location.href = "/home";
-                } else {
-                    alert("Đăng nhập thất bại, vui lòng kiểm tra lại thông tin");
-                }
+          })
+            .then((response) => response.json()) // Chuyển đổi phản hồi thành JSON
+            .then((data) => {
+              if (data != 0) {
+                alert("Đăng nhập thành công");
+                window.location.href = "/home";
+              } else {
+                alert("Đăng nhập thất bại, vui lòng kiểm tra lại thông tin");
+              }
             })
             .catch((error) => {
-                alert('Lỗi khi gửi dữ liệu: ' + error.message);
+              alert("Lỗi khi gửi dữ liệu: " + error.message);
             });
-    });
-
-</script>
-</body>
+        });
+    </script>
+  </body>
 </html>
