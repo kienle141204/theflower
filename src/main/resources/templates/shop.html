@@ -114,14 +114,21 @@
                                 })
                                     .then(response => {
                                         if (!response.ok) {
-                                            throw new Error('Thêm vào giỏ hàng thất bại!');
+                                            if (response.status === 401) { // 401: Unauthorized
+                                                throw new Error('Vui lòng đăng nhập để thêm vào giỏ hàng!');
+                                            }
+                                            throw new Error('Thêm vào giỏ hàng thất bại!Vui lòng đăng nhập!!!');
                                         }
 
-                                        alert("Them thanh cong!!")
+                                        alert("Them thanh cong!!");
                                     })
 
                                     .catch(error => {
-                                        alert('Lỗi!!!')
+                                        alert(error.message);
+                                        if (error.message.includes('thất bại')) {
+                                            window.location.href = '/login';
+                                        }
+
                                     });
                             });
 

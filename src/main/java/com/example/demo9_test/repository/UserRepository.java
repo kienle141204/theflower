@@ -1,24 +1,29 @@
 package com.example.demo9_test.repository;
 
+import com.example.demo9_test.entity.Product;
 import com.example.demo9_test.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class UserRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public int check_login(String email, String password) {
-        String sql = "select id from user where email=? and password=?";
+    public User check_login(String email, String password) {
+        String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
         try {
-            Integer result = jdbcTemplate.queryForObject(sql, Integer.class, email, password);
-            return result != null ? result : 0; // Nếu kết quả trả về null, trả về 0
+            return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(User.class), email, password);
         } catch (Exception e) {
-            return 0; // Trả về 0 nếu có lỗi
+            return null;
         }
     }
+
 
     public void addUser(String name, String email, String password, String phone_number, String address) {
         String checkSql = "SELECT COUNT(*) FROM user WHERE email = ?";

@@ -2,6 +2,7 @@ package com.example.demo9_test.controller;
 
 import com.example.demo9_test.entity.Product;
 import com.example.demo9_test.repository.ProductRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,6 +63,18 @@ public class MainController
     @GetMapping("/forgot-pw")
     public String forgotPassword() {
         return "forgot_password";
+    }
+
+    @GetMapping("/cart")
+    public String cart(Model model, HttpSession session) {
+        String userName = (String) session.getAttribute("user_name");
+        String phoneNumber = (String) session.getAttribute("phone_number");
+        String address = (String) session.getAttribute("address");
+
+        model.addAttribute("user_name", userName);
+        model.addAttribute("phone_number", phoneNumber);
+        model.addAttribute("address", address);
+        return "cart";
     }
 
 }

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- style -->
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <!-- link icon -->
+    <link rel="stylesheet" href="/font/bootstrap-icons.min.css">
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/home.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .cart-container {
+            font-family: Georgia, serif;
+            display: flex;
+            max-width: 1200px;
+            margin: 50px auto;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-items, .cart-summary {
+            padding: 20px;
+        }
+
+        .cart-items {
+            flex: 2;
+            border-right: 1px solid #ddd;
+        }
+
+        .cart-summary {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .quantity button {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .quantity input {
+            width: 40px;
+            text-align: center;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background: #a4c639;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .checkout-btn:hover {
+            background: #8fbf34;
+        }
+
+        .delivery form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .delivery label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .delivery input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="navbar :: navbar"></div>
+<div class="cart-container">
+    <!-- Cart Items Section -->
+    <div class="cart-items">
+        <h2>CART</h2>
+
+        <div id="cart_items"></div>
+
+    </div>
+
+    <!-- Cart Summary Section -->
+    <div class="cart-summary">
+        <h2>Checkout Details</h2>
+        <div class="price" id="subtotal"></div>
+        <div class="delivery">
+            <form>
+                <label for="name">Name *</label>
+                <input type="text" id="name" placeholder="Enter your name" th:value="${user_name}" required>
+
+                <label for="phone">Phone Number *</label>
+                <input type="text" id="phone" placeholder="Enter your phone number" th:value="${phone_number}" required>
+
+                <label for="address">Address *</label>
+                <input type="text" id="address" placeholder="Enter your delivery address" th:value="${address}" required>
+
+                <button class="checkout-btn">CHECK OUT</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let subtotal = 0;
+        fetch("api/cart/product")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Mạng bị lỗi!');
+                }
+                return response.json();
+            })
+            .then(products => {
+                const container = document.getElementById('cart_items');
+                document.getElementById('subtotal').textContent = subtotal;
+
+                products
+                    .filter(product => product.imageUrl && product.imageUrl.trim() !== '')
+                    .forEach(product => {
+                        const productCard = document.createElement('div');
+                        subtotal += product.price;
+                        productCard.innerHTML = `
+                        <div class="cart-item">
+                            <img src="${product.imageUrl}" alt="#">
+                            <div class="item-details">
+                                <h3>${product.name}</h3>
+                                <p>${product.price.toLocaleString('vi-VN')}</p>
+                            </div>
+                            <div class="item-actions">
+                                <button class="remove-btn">Remove</button>
+                                <div class="quantity">
+                                    <button class="decrease">-</button>
+                                    <input type="text" value="1">
+                                    <button class="increase">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                        container.appendChild(productCard);
+
+                        document.getElementById("subtotal").textContent = subtotal.toLocaleString('vi-VN') + ' VND';
+
+                        // Xử lý sự kiện giảm số lượng
+                        productCard.querySelector('.decrease').addEventListener('click', () => {
+                            const input = productCard.querySelector('input');
+                            let value = parseInt(input.value);
+                            if (value > 1) {
+                                input.value = value - 1;
+                                subtotal -= product.price;
+                                document.getElementById("subtotal").textContent = subtotal.toLocaleString('vi-VN') + ' VND';
+                            }
+                        });
+
+                        // Xử lý sự kiện tăng số lượng
+                        productCard.querySelector('.increase').addEventListener('click', () => {
+                            const input = productCard.querySelector('input');
+                            let value = parseInt(input.value);
+                            input.value = value + 1;
+                            subtotal += product.price;
+                            document.getElementById("subtotal").textContent = subtotal.toLocaleString('vi-VN') + ' VND';
+                        });
+
+                        // Xử lý sự kiện xóa sản phẩm
+                        productCard.querySelector('.remove-btn').addEventListener('click', () => {
+                            subtotal -= product.price * parseInt(productCard.querySelector('input').value);
+                            document.getElementById("subtotal").textContent = subtotal.toLocaleString('vi-VN') + ' VND';
+                            productCard.remove();
+                            const formData = new FormData();
+                            formData.append("product_id", product.id);
+                            fetch("api/cart/product/remove", {
+                                method: "POST",
+                                body: formData
+                            })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('Lỗi khi xóa sản phẩm!');
+                                    }
+                                    return response.json();
+                                })
+                                .catch(error => {
+                                    console.error("Lỗi:", error);
+                                });
+
+                        });
+                    });
+            })
+            .catch(error => {
+                console.error('Lỗi khi tải dữ liệu sản phẩm:', error);
+            });
+    });
+
+</script>
+<div th:insert="asset :: footer"></div>
+</body>
+</html>

@@ -19,15 +19,17 @@ public class LoginController {
     @Autowired
     private UserRepository userRepository;
 
-    User user;
     @PostMapping("/api/check_login")
-    public ResponseEntity<Integer> checkLogin(@RequestParam("email") String email,
+    public ResponseEntity<User> checkLogin(@RequestParam("email") String email,
                                               @RequestParam("password") String password,
                                               HttpSession session) {
-        int user_id = userRepository.check_login(email, password);
-        session.setAttribute("email", email);
-        session.setAttribute("user_id", user_id);
-        return ResponseEntity.ok(user_id);
+        User user = userRepository.check_login(email, password);
+        session.setAttribute("email", user.getEmail());
+        session.setAttribute("user_id", user.getId());
+        session.setAttribute("user_name", user.getName());
+        session.setAttribute("phone_number", user.getPhone_number());
+        session.setAttribute("address", user.getAddress());
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/api/register")
