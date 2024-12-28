@@ -1,0 +1,27 @@
+.btn {
+    background-color: #A6A15B; 
+    border: solid 1px #A6A15B;
+    transition: background-color 0.3s, border-color 0.3s; 
+}
+.btn:hover {
+    background-color: #8B8A4A; 
+    border: solid 1px #8B8A4A;
+}
+.btn:active {
+    background-color: #8B8A4A !important; 
+    border: solid 1px #8B8A4A !important;
+}
+body {
+    background-color: #EAEAEA;
+}
+.border {
+    background-color: white;
+    border-radius: 20px !important;
+    border: none !important;
+}
+.form-control:focus {
+    outline: none; 
+    border: 2px solid #A6A15B; 
+    box-shadow: 0 0 5px #A6A15B; 
+    border-radius: 5px; 
+}

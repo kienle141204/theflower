@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- style -->
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <!-- link icon -->
+    <link rel="stylesheet" href="/font/bootstrap-icons.min.css">
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Shop</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/home.css">
+
+</head>
+<body>
+
+<div class="div0">
+    <p>
+        Order
+        <strong>before 1pm</strong>
+        for same day delivery!
+    </p>
+</div>
+
+<div th:insert="navbar :: navbar"></div>
+
+<!-- header -->
+<div>
+    <ul class="pt-5 pb-5 list-unstyled color-custom text-white mb-0">
+        <li class="text-center display-4 text-header" id="text-header">
+        </li>
+    </ul>
+</div>
+<!-- end header -->
+
+<div class="my-5 mx-5">
+    <div class="row">
+        <!-- Các sản phẩm sẽ được thêm vào đây -->
+        <div id="product-container" class="row"></div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const currentPath = window.location.pathname;
+        let text_header = 'SHOP';
+        let apiUrl;
+
+        const  parts = currentPath.split("/");
+
+        const category = parts[parts.length - 1];
+        text_header = category.replace(/_/g, ' ').toUpperCase();
+
+
+        if(currentPath === "/shop"){
+            apiUrl = '/api/products';
+        }
+        else{
+            apiUrl = `/api/products/shop/${category}`;
+        }
+
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Mạng bị lỗi!');
+                }
+                return response.json();
+            })
+            .then(products => {
+                const container = document.getElementById('product-container');
+
+                // Cập nhật text header
+                document.getElementById('text-header').textContent = text_header;
+
+                // Thêm các sản phẩm vào container
+                products
+                    .filter(product => product.imageUrl && product.imageUrl.trim() !== '')
+                    .forEach(product => {
+                        const productCard = document.createElement('div');
+                        productCard.classList.add('col-md-4', 'mb-4');
+                        if(product.quantity > 0){
+                            productCard.innerHTML = `
+                                <div class="card h-100 shadow-sm"> <!-- Bootstrap card -->
+                                    <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${product.name}</h5>
+                                        <p class="card-text">${product.price.toLocaleString('vi-VN')} VND</p>
+                                    </div>
+                                    <div class="card-footer bg-white">
+                                        <div class="row">
+                                            <button id="quickAdd" class="btn w-25" style="background-color: #b5b569">Quick Add</button>
+                                            <button id="BuyNow" class="btn w-75" style="background-color: #656522">Buy Now</button>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                    `;
+                            const formData = new FormData();
+                            formData.append("product_id", product.id);
+                            formData.append("quantity", 1);
+
+                            productCard.querySelector('#BuyNow').addEventListener('click', function () {
+                                window.location.href = `/buy/${product.id}`;
+                            });
+                            productCard.querySelector('#quickAdd').addEventListener('click', function () {
+                                fetch(`/api/cart/add`, {
+                                    method: 'POST',
+                                    body: formData
+                                })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Thêm vào giỏ hàng thất bại!');
+                                        }
+
+                                        alert("Them thanh cong!!")
+                                    })
+
+                                    .catch(error => {
+                                        alert('Lỗi!!!')
+                                    });
+                            });
+
+
+                            // productCard.querySelector('#quickAdd').addEventListener('click', function () {
+                            //     window.location.href = `/api/products/shop/${product.id}`;
+                            // });
+                            // document.getElementById('quickAdd').addEventListener('click', function () {
+                            //         fetch(`/api/products/shop/${product.id}`)
+                            //             .then(response => {
+                            //                 if (!response.ok) {
+                            //                     throw new Error('Mạng bị lỗi!');
+                            //                 }
+                            //                 return response.json();
+                            //             })
+
+                            //
+                            //      });
+
+                        }
+                        else{
+                            productCard.innerHTML = `
+                                <div class="card h-100 shadow-sm"> <!-- Bootstrap card -->
+                                    <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${product.name}</h5>
+                                        <p class="card-text">${product.price.toLocaleString('vi-VN')} VND</p>
+                                    </div>
+                                    <div class="card-footer bg-white">
+                                        <button class="btn w-100 btn-disabled" disabled style="background-color: #ccc; color: #fff;">Sale Out</button>
+                                    </div>
+                                </div>
+                    `;
+                        }
+                        container.appendChild(productCard);
+                    });
+            })
+            .catch(error => {
+                console.error('Lỗi khi tải dữ liệu sản phẩm:', error);
+            });
+    });
+
+
+</script>
+
+<div th:insert="asset :: footer"></div>
+
+<!-- js -->
+<script src="/bootstrap.bundle.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,331 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.div0 {
+    background-color: #aaae5a;
+    height: 36px;
+    width: 100vw;
+    top: 0vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.div0 p {
+    color: white;
+    font-size: 18px;
+    margin: 0px;
+}
+.div1 {
+    display: flex;
+}
+.div1 .vid {
+    position: relative;
+    /* top: 0%;
+    left: 0%; */
+    height: calc(100vh - 36px);
+    width: 100vw;
+    object-fit: cover;
+    overflow: hidden;
+}
+.div1 .textCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 37px;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+    object-fit: cover;
+    display: flex;
+}
+.div1 .buttonCenter {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #C4C682;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 20px; /* Add rounded corners */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    /* display: flex; */
+}
+
+.div1 .buttonCenter:hover {
+    background-color: #C4C670;
+}
+
+.div1 .buttonCenter .aButton {
+    color: #FFFFFF;
+    font-size: 12px;
+    font-family: "Slate", sans-serif;
+    text-decoration: none;
+    white-space: nowrap; /* Prevents the text from wrapping to a new line */
+}
+.div1 .navBar {
+    position: absolute;
+    top: 10%;
+    left: 1%;
+    font-size: 13px;
+}
+
+.div1 .navBar a {
+    padding: 14px;
+    border: none;
+    color: white;
+}
+.div1 .img {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    height: 85px;
+    width: 220px;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    object-fit: cover;
+    display: flex;
+}
+.div2 {
+    background-color: white;
+    height: 100px;
+    display: flex;
+    justify-content: center; /*  can theo chieu ngang*/
+    align-items: center; /* can theo chieu doc */
+    margin: 30px 0px;
+}
+.div2 div {
+    display: inline-block;
+    justify-content: center;
+    display: flex;
+    height: 100px;
+    width: 200px;
+    padding: 0px 10px;
+}
+.div2 img {
+    height: 100px;
+    width: 100px;
+
+}
+.div3 {
+    position: relative;
+    margin-bottom: 25px;
+}
+.div3 img {
+    height: 90vh;
+    width: 100vw;
+    object-fit: cover;
+}
+.div3 .span1 {
+    position: absolute;
+    font-size: 47.5px;
+    color: white;
+    bottom: 45%;
+    left: 4%;
+}
+.div3 button {
+    position: absolute;
+    background-color: #C4C682;
+    padding: 10px 18px;
+    border-radius: 20px;
+    border: none;
+    display: inline-flex;
+    bottom: 35%;
+    left: 4%;
+}
+.div3 button a {
+    font-size: 14px;
+    color: white;
+    font-family: "Slate", sans-serif;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.div4 h2 {
+    font-size: 29px;
+    width: 100%;
+    color: #17171E;
+    display: block;
+    margin-bottom: 20px;
+}
+.div4 {
+    display: flex;
+    flex-wrap: wrap;
+}
+.div4 {
+    display: flex;
+    justify-content: center; /* Căn giữa toàn bộ nội dung */
+    align-items: flex-start; /* Đảm bảo tất cả ảnh cùng hàng */ /* Khoảng cách giữa các ảnh */
+    padding: 0 20px; /* Khoảng cách từ lề trái và lề phải */
+}
+.div4 .divContainImage {
+    position: relative;
+    display: flex;
+    height: 510px;
+    width: 340px;
+    margin: 10px;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    flex-wrap: wrap;
+}
+.image-container img{
+    position: absolute;
+    display: block;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    height: 460px;
+    width: 340px;
+    transition: opacity 0.3s ease-in-out;
+}
+.div4 a {
+    text-decoration: none;
+    padding: 20px;
+}
+.div4 a span:first-of-type {
+    position: absolute;
+    color: #010101;
+    margin: 0px 0px 4px;
+    font-size: 14.7px;
+    display: block;
+    bottom: calc(0% + 14px);
+}
+.div4 a span:nth-of-type(2) {
+    position: absolute;
+    color: #404042;
+    font-size: 13.23px;
+    display: block;
+    bottom: 0%;
+    opacity: 90%;
+
+}
+.div4 a span:first-of-type:hover {
+    color: gray;
+    transition: opacity 0.3s ease-in-out;
+}
+.div4 a span:first-of-type,
+.div4 a span:nth-of-type(2) {
+    position: absolute;
+    left: 50%; /* Đặt ở giữa theo chiều ngang */
+    transform: translateX(-50%); /* Căn giữa chính xác */
+    text-align: center;
+    display: block;
+    width: 100%; /* Đảm bảo text không tràn ra khỏi container */
+}
+.image-container .default-image {
+    opacity: 1;
+}
+.image-container .hover-image {
+    opacity: 0;
+}
+.image-container .default-image:hover {
+    opacity: 0;
+}
+.image-container .hover-image:hover {
+    opacity: 1;
+}
+.div5 h2 {
+    font-size: 29px;
+    width: 100%;
+    color: #17171E;
+    display: block;
+    margin-bottom: 20px;
+}
+.div5 {
+    display: flex;
+    flex-wrap: wrap;
+}
+.div5 {
+    display: flex;
+    justify-content: center; /* Căn giữa toàn bộ nội dung */
+    align-items: flex-start; /* Đảm bảo tất cả ảnh cùng hàng */
+    padding: 0 20px; /* Khoảng cách từ lề trái và lề phải */
+    margin-bottom: 35px;
+}
+.div5 .divContainImage {
+    position: relative;
+    display: flex;
+    height: 510px;
+    width: 340px;
+    margin: 10px;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    flex-wrap: wrap;
+}
+.image-container img{
+    position: absolute;
+    display: block;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    height: 460px;
+    width: 340px;
+    transition: opacity 0.3s ease-in-out;
+}
+.div5 a {
+    text-decoration: none;
+    padding: 20px;
+}
+.div5 a span:first-of-type {
+    position: absolute;
+    color: #010101;
+    margin: 0px 0px 4px;
+    font-size: 14.7px;
+    display: block;
+    bottom: calc(0% + 14px);
+}
+.div5 a span:nth-of-type(2) {
+    position: absolute;
+    color: #404042;
+    font-size: 13.23px;
+    display: block;
+    bottom: 0%;
+    opacity: 90%;
+}
+.div5 a span:first-of-type:hover {
+    color: gray;
+    transition: opacity 0.3s ease-in-out;
+}
+.div5 a span:first-of-type,
+.div5 a span:nth-of-type(2) {
+    position: absolute;
+    left: 50%; /* Đặt ở giữa theo chiều ngang */
+    transform: translateX(-50%); /* Căn giữa chính xác */
+    text-align: center;
+    display: block;
+}
+.div6 {
+    width: 100vw;
+    height: auto;
+    margin-top: 50px;
+    background-color: #898e4a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.div6 div{
+    max-width: 30%;
+    text-align: center;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.div6 svg {
+    height: 30px;
+    width: 30px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    fill: #898e4a;
+}
+
+.textCenter{
+    font-family: 'Georgia', serif;
+}

@@ -1,0 +1,489 @@
+body {
+    color: #D0D088;
+}
+
+.color-custom {
+    background-color: #D0D088;
+}
+
+/* Đặt màu chữ cho navbar */
+.navbar-nav .nav-link {
+    font-size: 16px;
+    font-weight: 500;
+    color: #93933e !important; /* Đặt màu chữ cho các liên kết trong navbar */
+}
+
+
+/* Đặt màu chữ cho brand logo */
+.navbar-brand {
+    color: #D0D088 !important; /* Đặt màu chữ cho thương hiệu */
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+.full-width-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-family: 'Georgia', serif;
+    font-size: 32px;
+    font-weight: normal;
+    color: #333;
+    margin: 0;
+}
+.info {
+    font-size: 16px;
+    color: #666;
+    margin: 15px 0;
+    line-height: 1.6;
+}
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    /* background-color: #a3a380; */
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+}
+/* .button:hover {
+    background-color: #91916e;
+} */
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+.bold-text {
+    font-weight: bold;
+}
+
+.text-header{
+    font-family: 'Georgia', serif;
+    font-size: 50px;
+}
+
+.navbar .nav-link {
+    font-size: 18px;               /* Điều chỉnh kích thước chữ */
+    padding: 10px 20px;            /* Tăng khoảng cách bên trong */
+    background-color: white;     /* Đặt màu nền cho nút */
+    color: white;                  /* Màu chữ */
+    border-radius: 0px;            /* Bo tròn các góc */
+    text-align: center;            /* Căn giữa nội dung */
+    text-decoration: none;         /* Xóa gạch chân mặc định */
+}
+
+.navbar .nav-link:hover {
+    /* background-color: #91916e; */
+    text-decoration: underline;    /* Hiển thị gạch chân khi hover */
+    text-underline-offset: 40px;
+}
+
+.icon-color {
+    color: #D0D088; /* Màu sắc mà bạn muốn sử dụng cho biểu tượng */
+}
+
+.btn-send {
+    width: 100%;
+    background-color: #c7c77d;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 30px;
+    border: none;
+}
+.btn-send:hover {
+    background-color: #b5b569;
+}
+.form-control {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    padding-left: 0;
+    box-shadow: none;
+}
+.form-control:focus {
+    border-color: #a0a0a0;
+    box-shadow: none;
+}
+
+/* CSS */
+.bg-contact-header {
+    background-image: url('./image/contact_bg.jpg'); /* Đường dẫn đến ảnh nền */
+    background-size: cover; /* Để ảnh phủ toàn bộ */
+    background-position: center; /* Căn giữa ảnh nền */
+    background-repeat: no-repeat; /* Không lặp lại ảnh */
+    color: white; /* Màu chữ */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* Đổ bóng để chữ dễ đọc hơn */
+    padding: 150px;
+}
+
+.footer {
+    background-size: cover;
+    background-position: center;
+    color: black;
+    background-color: #81883f;
+}
+
+.footer h5, .footer h2, .footer a {
+    font-family: Georgia, serif;
+    color: black;
+}
+
+.footer a:hover {
+    color: #ddd;
+}
+
+.footer .social-icons img {
+    width: 24px; /* Kích thước icon */
+    margin-right: 10px;
+}
+
+.footer input[type="email"] {
+    max-width: 250px;
+}
+
+.contact-section{
+    color: #333;
+    font-size: 18px;
+    font-family: Georgia, serif;
+}
+
+.div0 {
+    background-color: #aaae5a;
+    height: 36px;
+    width: 100vw;
+    top: 0vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.div0 p {
+    color: white;
+    font-size: 18px;
+    margin: 0px;
+}
+
+/* Thêm CSS cho navbar */
+.navbar-overlay {
+    position: absolute; /* Đặt navbar ở vị trí tuyệt đối */
+    top: 36px; /* Đặt navbar ở đầu màn hình */
+    left: 0;
+    right: 0;
+    z-index: 10; /* Đảm bảo navbar luôn ở trên video */
+}
+
+/* Đảm bảo video không che navbar */
+.div1 {
+    position: relative;
+    z-index: 1;
+}
+
+.vid {
+    width: 100%; /* Đảm bảo video phủ toàn màn hình */
+    height: 100vh; /* Chiều cao bằng chiều cao của màn hình */
+    object-fit: cover; /* Đảm bảo video lấp đầy màn hình mà không bị biến dạng */
+}
+/* Chỉnh sửa navbar link để có nền trong suốt */
+.navbar-nav .nav-link {
+    background-color: transparent;
+}
+.d-flex .nav-item .nav-link {
+    background: none;
+}
+
+.navbar-brand img {
+    width: 80%; /* Chiều rộng của logo bằng 80% chiều rộng phần chứa */
+    height: auto; /* Giữ tỷ lệ cho logo */
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: white; /* Màu chữ trắng */
+}
+
+/* Thêm hiệu ứng hover nếu cần */
+.navbar-custom .navbar-nav .nav-link:hover {
+    color: #f1f1f1; /* Màu chữ sáng hơn khi hover */
+}
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    background-color: #D0D088;
+}
+
+.dropdown-menu {
+    margin-top: 0;
+}
+
+
+/* style cua dung */
+
+.notifi-mes {
+    display: block;
+    background: #979724;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 20px;
+    text-align: center;
+    margin: -10px;
+}
+
+.page-header {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 130px;
+    margin: -10px;
+    margin-top: 5px;
+}
+
+.left-side {
+    width: 400px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+}
+
+.search-img {
+    width: 40px;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+.bag-img {
+    width: 40px;
+    margin-bottom: 5px;
+}
+.user-img {
+    width: 40px;
+    margin-right: 15px;
+}
+.product-info {
+    background-color: rgb(234, 234, 234);
+    display: grid;
+    grid-template-columns: 670px 1fr;
+    padding: 100px;
+    column-gap: 30px;
+    margin-top: 10px;
+    margin-left: -50px;
+    margin-right: -50px;
+}
+.flower-img {
+    width: 670px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.product-details {
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.product-option {
+    margin-bottom: 20px;
+}
+
+.product-option label {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+.product-option .selected-option {
+    font-size: 14px;
+    color: #8c8c8c;
+    display: block;
+    margin-bottom: 5px;
+}
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.quantity-add {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.quantity-select {
+    width: 100px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.add-to-cart {
+    width: 300px;
+    flex: 1;
+    padding: 10px;
+    background-color: #c0c097;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.add-to-cart:hover {
+    background-color: #a9a983;
+}
+.flower-des-all {
+    margin-top: 40px;
+    font-size: 17px;
+    font-weight: 500;
+}
+.flower-des {
+    margin-top: 10px;
+}
+
+.related-product {
+    text-align: center;
+    padding: 20px;
+}
+
+.related-product-header {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.related-product-header:hover {
+    text-decoration: underline;
+}
+
+.related-product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.related-product-info {
+    margin-top: 30px;
+    width: 300px;
+}
+
+.related-product-name:hover {
+    color: #8c8c8c;
+}
+
+.related-product-img {
+    width: 350px;
+}
+
+.footer {
+    background-color: #d5d5a4;
+    color: #4a4a29;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+}
+
+.faq-section {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.faq-item {
+    cursor: pointer;
+    font-size: 16px;
+    border-bottom: 1px solid transparent;
+    padding: 5px;
+    transition: all 0.3s;
+}
+
+.faq-item:hover {
+    border-bottom: 1px solid #4a4a29;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-column {
+    flex: 1 1 calc(33.333% - 20px);
+    min-width: 250px;
+}
+
+.footer-logo {
+    font-family: "Comic Sans MS", cursive;
+    font-size: 24px;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+}
+
+.newsletter-form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4a4a29;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.social-icons img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 8px 0;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #4a4a29;
+    transition: color 0.3s;
+}
+
+ul li a:hover {
+    color: #333;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #bbb;
+    padding-top: 20px;
+    margin-top: 20px;
+    font-size: 14px;
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--navbar-->
+<div th:fragment="navbar">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg mt-4 mb-4 pt-4 pb-4 navbar-overlay">
+        <div class="container-fluid">
+            <!-- Nút để điều chỉnh khi màn hình nhỏ -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="d-none d-lg-block">
+                <nav class="navbar navbar-expand-lg navbar-custom">
+                    <div class="container-fluid">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item mx-2">
+                                <a class="nav-link active" aria-current="page" href="home" style="color: #FFFFFF !important;">HOME</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link active" aria-current="page" href="shop" style="color: #FFFFFF !important;">SHOP</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link active" aria-current="page" href="store" style="color: #FFFFFF !important;">OUR STORES</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link active" aria-current="page" href="contact" style="color: #FFFFFF !important;">CONTACT</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <a class="navbar-brand position-absolute" href="home" style="left: 50%; transform: translateX(-50%);">
+                <img src="/image/Website_logos_4.png" alt="The Flower Web" class="">
+            </a>
+
+            <!-- Icon Menu Phải -->
+            <ul class="d-flex list-unstyled mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="bi bi-search fs-5 icon-color" style="color: white;"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="bi bi-bag fs-5 icon-color" style="color: white;"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Offcanvas -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item mx-3">
+                    <a class="nav-link active" aria-current="page" href="/home">HOME</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link active" aria-current="page" href="/shop">SHOP</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link active" aria-current="page" href="/store">OUR STORES</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link active" aria-current="page" href="/contact">CONTACT</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!--footer-->
+<div th:fragment="footer">
+    <footer>
+        <!-- Footer -->
+        <div class="footer bg-cover text-white pt-5">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo và Thông tin về Newsletter -->
+                    <div class="col-md-4 mb-4">
+                        <h2 class="pb-3" style="font-family:'Georgia', serif;">The Flower Web</h2>
+                        <h5>Newsletter</h5>
+                        <p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
+                        <input type="email" class="form-control mb-2" placeholder="Email" style="background-color: rgba(0,0,0,0);">
+                        <small>This site is protected by hCaptcha and the hCaptcha Privacy Policy and Terms of Service apply.</small>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="col-md-2 mb-4">
+                        <h5>Menu</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="/home" class="text-white">Home</a></li>
+                            <li><a href="/shop" class="text-white">Shop</a></li>
+                            <li><a href="/store" class="text-white">Our Stores</a></li>
+                            <li><a href="/contact" class="text-white">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Thông tin liên hệ -->
+                    <div class="col-md-4 mb-4">
+                        <h5>Visit any of our stores!</h5>
+                        <p>View store finder <a href="#" class="text-dark">here</a>.</p>
+                        <p>+61 427 184 951</p>
+                        <p>info@theflowerweb.com.au</p>
+                        <p>Website by <a href="#" class="text-dark">Studio Float</a></p>
+                    </div>
+                </div>
+                <div class="text-center mt-4 mb-0">
+                    <p>&copy; The Flower Web 2024 &nbsp; Powered by Shopify</p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+</div>
+
+</body>
+</html>

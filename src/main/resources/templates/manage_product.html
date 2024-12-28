@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- style -->
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <!-- link icon -->
+    <link rel="stylesheet" href="/font/bootstrap-icons.min.css">
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Chỉnh sửa sản phẩm</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/manageProduct.css">
+</head>
+<body>
+
+
+<div class="px-5 py-5" >
+    <div class="row">
+        <div class="col-md-6">
+            <img class="img-fluid border rounded" id="product-img" />
+        </div>
+        <div class="col-md-6" style="background-color: white; padding-left: 100px; padding-right: 100px;">
+            <!-- Hiển thị tên sản phẩm -->
+            <h1 class="product-title py-5" id="product-name"></h1>
+
+            <!-- Hiển thị giá cũ (không thể chỉnh sửa) -->
+<!--            <label for="product-price-old">Giá cũ:</label>-->
+<!--            <p class="product-price" id="product-price-old" style="font-size: 20px; font-weight: bold;"></p>-->
+                                             
+            <label for="product-price-new">Nhập giá mới:</label>
+            <input type="number" class="form-control mb-3" id="product-price-new" style="font-size: 16px;">
+
+            <label for="product-des">Mô tả sản phẩm:</label>
+            <textarea id="product-des" class="form-control mb-3" rows="5" style="font-size: 14px;"></textarea>
+
+            <button id="submit-changes" class="btn btn-primary mt-3">Submit</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const path = window.location.pathname;
+    const parts = path.split("/");
+    const productId = parseInt(parts[parts.length - 1], 10);
+
+    // Lấy dữ liệu sản phẩm từ server
+    fetch(`/api/products/${productId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Không thể lấy thông tin sản phẩm.");
+            }
+            return response.json();
+        })
+        .then(product => {
+            document.getElementById("product-img").src = product.imageUrl;
+            document.getElementById("product-name").textContent = product.name;
+            document.getElementById("product-price-new").value = product.price;
+            document.getElementById("product-des").value = product.description;
+        })
+        .catch(error => {
+            console.error("Lỗi:", error);
+        });
+
+    // Gửi dữ liệu cập nhật về server
+    document.getElementById("submit-changes").addEventListener("click", () => {
+        const name = document.getElementById('product-name').value;
+        const price = parseInt(document.getElementById('product-price-new').value);
+        const description = document.getElementById('product-des').value;
+
+        fetch(`/api/manage_00112299/update`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `id=${productId}&name=${encodeURIComponent(name)}&price=${price}&description=${encodeURIComponent(description)}`,
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Không thể cập nhật sản phẩm.");
+                }
+                alert("Cập nhật thành công!");
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error("Lỗi:", error);
+                alert("Có lỗi xảy ra khi cập nhật sản phẩm.");
+            });
+    });
+
+</script>
+</body>
+
+
+</html>
