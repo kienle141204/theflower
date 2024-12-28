@@ -13,20 +13,23 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // Tự động sinh giá trị id
     private int id;
-
     private String name;
     private String email;
     private String password;
+    private String phone_number;
+    private String address;
 
     // Constructor không tham số
     public User() {}
 
     // Constructor với tham số
-    public User(int id, String name, String email, String password) {
+    public User(int id, String name, String email, String password, String phone_number, String address) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.phone_number = phone_number;
+        this.address = address;
     }
 
     // Getter và Setter
@@ -60,5 +63,17 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public String getPhone_number() {
+        return phone_number;
+    }
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

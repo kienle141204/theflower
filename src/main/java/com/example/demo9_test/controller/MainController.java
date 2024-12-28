@@ -20,12 +20,10 @@ public class MainController
         return "home_page";
     }
 
-    @GetMapping({"/shop", "/shop/plants", "/shop/mixed_bouquets", "/shop/christmas", "/shop/one_of_aKind", "/shop/seasonal", "/shop/special_occasion", "/shop/food_drinks"})
+    @GetMapping({"/shop", "/shop/plants", "/shop/mixed_bouquets", "/shop/christmas", "/shop/one_of_a_kind", "/shop/seasonal", "/shop/special_occasion", "/shop/food_drinks"})
     public String shop() {
         return "shop";
     }
-
-
 
     @GetMapping("/store")
     public String ourStores() {
@@ -36,8 +34,6 @@ public class MainController
     public String Contact() {
         return "contact_page";
     }
-
-
 
 
     @GetMapping("/test") // Trả về trang HTML khi truy cập /products
@@ -53,8 +49,19 @@ public class MainController
         return "product"; // Trang chi tiết sản phẩm
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
 
-
+    @GetMapping("/forgot-pw")
+    public String forgotPassword() {
+        return "forgot_password";
+    }
 
 }

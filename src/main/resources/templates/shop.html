@@ -46,35 +46,22 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const currentPath = window.location.pathname;
+        let text_header = 'SHOP';
         let apiUrl;
-        let text_header = 'Shop';
 
-        if (currentPath === "/shop/plants") {
-            apiUrl = '/api/products/plants';
-            text_header = 'Plants';
-        } else if (currentPath === "/shop/mixed_bouquets") {
-            apiUrl = '/api/products/mixed_bouquets';
-            text_header = 'Mixed Bouquets';
-        } else if (currentPath === "/shop/christmas") {
-            apiUrl = '/api/products/christmas';
-            text_header = 'Christmas';
-        } else if (currentPath === "/shop/one_of_aKind") {
-            apiUrl = '/api/products/one_of_aKind';
-            text_header = 'One Of A Kind';
-        } else if (currentPath === "/shop/seasonal") {
-            apiUrl = '/api/products/seasonal';
-            text_header = 'Seasonal Bouquets';
-        } else if (currentPath === "/shop/special_occasion") {
-            apiUrl = '/api/products/special_occasion';
-            text_header = 'Special Occasion';
-        } else if (currentPath === "/shop/food_drinks") {
-            apiUrl = '/api/products/food_drinks';
-            text_header = 'Food And Drinks';
-        } else {
+        const  parts = currentPath.split("/");
+
+        const category = parts[parts.length - 1];
+        text_header = category.replace(/_/g, ' ').toUpperCase();
+
+
+        if(currentPath === "/shop"){
             apiUrl = '/api/products';
         }
+        else{
+            apiUrl = `/api/products/shop/${category}`;
+        }
 
-        // Gửi yêu cầu đến API
         fetch(apiUrl)
             .then(response => {
                 if (!response.ok) {
@@ -103,14 +90,57 @@
                                         <p class="card-text">${product.price.toLocaleString('vi-VN')} VND</p>
                                     </div>
                                     <div class="card-footer bg-white">
-                                        <button class="btn w-100" style="background-color: #b5b569">Quick Add</button>
+                                        <div class="row">
+                                            <button id="quickAdd" class="btn w-25" style="background-color: #b5b569">Quick Add</button>
+                                            <button id="BuyNow" class="btn w-75" style="background-color: #656522">Buy Now</button>
+                                        </div>
+
+
+
                                     </div>
                                 </div>
                     `;
+                            const formData = new FormData();
+                            formData.append("product_id", product.id);
+                            formData.append("quantity", 1);
 
-                            productCard.querySelector('.btn').addEventListener('click', function () {
+                            productCard.querySelector('#BuyNow').addEventListener('click', function () {
                                 window.location.href = `/buy/${product.id}`;
                             });
+                            productCard.querySelector('#quickAdd').addEventListener('click', function () {
+                                fetch(`/api/cart/add`, {
+                                    method: 'POST',
+                                    body: formData
+                                })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Thêm vào giỏ hàng thất bại!');
+                                        }
+
+                                        alert("Them thanh cong!!")
+                                    })
+
+                                    .catch(error => {
+                                        alert('Lỗi!!!')
+                                    });
+                            });
+
+
+                            // productCard.querySelector('#quickAdd').addEventListener('click', function () {
+                            //     window.location.href = `/api/products/shop/${product.id}`;
+                            // });
+                            // document.getElementById('quickAdd').addEventListener('click', function () {
+                            //         fetch(`/api/products/shop/${product.id}`)
+                            //             .then(response => {
+                            //                 if (!response.ok) {
+                            //                     throw new Error('Mạng bị lỗi!');
+                            //                 }
+                            //                 return response.json();
+                            //             })
+
+                            //
+                            //      });
+
                         }
                         else{
                             productCard.innerHTML = `
@@ -133,6 +163,8 @@
                 console.error('Lỗi khi tải dữ liệu sản phẩm:', error);
             });
     });
+
+
 </script>
 
 <div th:insert="asset :: footer"></div>

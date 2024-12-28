@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- style -->
-    <link rel="stylesheet" href="/src/main/resources/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap.min.css">
     <!-- link icon -->
-    <link rel="stylesheet" href="/src/main/resources/static/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/font/bootstrap-icons.min.css">
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>Shop</title>
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/src/main/resources/static/manageShop.css">
+    <link rel="stylesheet" href="/manageShop.css">
 
 </head>
 <body>
@@ -96,7 +96,7 @@
             return;
         }
 
-        // Thay thế {name} trong URL bằng giá trị từ biến name
+
         fetch(`/api/products/manage_00112299/sale_out/${encodeURIComponent(name)}`)
             .then((response) => {
                 if (response.ok) {

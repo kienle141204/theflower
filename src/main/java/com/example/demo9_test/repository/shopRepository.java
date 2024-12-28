@@ -20,61 +20,73 @@ public class shopRepository {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
     }
 
-    public List<Product> getDataPlants() {
+//    public List<Product> getDataPlants() {
+//        String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
+//                "FROM products p " +
+//                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='pl'";
+//
+//        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
+//    }
+//
+//    public List<Product> getDataMixedBouquets() {
+//        String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
+//                "FROM products p " +
+//                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='mb'";
+//
+//        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
+//    }
+//
+//    public List<Product> getDataChristmas() {
+//        String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
+//                "FROM products p " +
+//                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='ch'";
+//
+//        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
+//    }
+//
+//    public List<Product> getDataOneOfAKind() {
+//        String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
+//                "FROM products p " +
+//                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='ooak'";
+//
+//        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
+//    }
+//
+//    public List<Product> getDataSeasonal() {
+//        String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
+//                "FROM products p " +
+//                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='ss'";
+//
+//        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
+//    }
+//
+//    public List<Product> getDataSpecialOccasion() {
+//        String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
+//                "FROM products p " +
+//                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='so'";
+//
+//        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
+//    }
+
+    public List<Product> getData(String category){
         String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
                 "FROM products p " +
-                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='pl'";
+                "JOIN product_category pc ON p.id = pc.product_id " +
+                "WHERE pc.category = ?";
 
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
+        System.out.println("Executing SQL: " + sql + " with category: " + category);
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class), category);
     }
 
-    public List<Product> getDataMixedBouquets() {
-        String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
-                "FROM products p " +
-                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='mb'";
 
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
-    }
-
-    public List<Product> getDataChristmas() {
-        String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
-                "FROM products p " +
-                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='ch'";
-
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
-    }
-
-    public List<Product> getDataOneOfAKind() {
-        String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
-                "FROM products p " +
-                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='ooak'";
-
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
-    }
-
-    public List<Product> getDataSeasonal() {
-        String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
-                "FROM products p " +
-                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='ss'";
-
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
-    }
-
-    public List<Product> getDataSpecialOccasion() {
-        String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
-                "FROM products p " +
-                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='so'";
-
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
-    }
-
-    public List<Product> getDataFoodDrinks() {
-        String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
-                "FROM products p " +
-                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='fd'";
-
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
-    }
+//    public List<Product> getDataFoodDrinks() {
+//        String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, p.quantity " +
+//                "FROM products p " +
+//                "JOIN product_category pc ON p.id = pc.product_id AND pc.category ='fd'";
+//
+//        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
+//    }
 
     public void saleOutProduct(String name){
         String sql = "UPDATE products SET quantity = 0 WHERE name = ?";
