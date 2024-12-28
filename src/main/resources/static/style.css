@@ -1,9 +1,9 @@
 body {
-    color: #D0D088;
+    color: #d0d088;
 }
 
 .color-custom {
-    background-color: #D0D088;
+    background-color: #d0d088;
 }
 
 /* Đặt màu chữ cho navbar */
@@ -13,13 +13,69 @@ body {
     color: #93933e !important; /* Đặt màu chữ cho các liên kết trong navbar */
 }
 
+/* Style cho thanh tìm kiếm */
+.search-bar {
+    background-color: #dbdba9;
+    border-radius: 25px;
+    padding: 5px 10px;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+/* Khi thanh tìm kiếm được focus */
+.search-bar:focus-within {
+    background-color: #dbdba9;
+}
+
+/* Style cho ô input */
+.search-input {
+    border: none;
+    background: transparent;
+    color: rgb(0, 0, 0);
+    outline: none;
+    width: 100%;
+}
+
+/* Placeholder của ô input */
+.search-input::placeholder {
+    color: #838383;
+}
+
+/* Khi ô input được focus */
+.search-input:focus {
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+}
+
+/* Style cho nút Search */
+.search-btn {
+    background-color: #b5b569;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hiệu ứng hover cho nút Search */
+.search-btn:hover {
+    background-color: #a2a559;
+}
+
+/* Hiệu ứng focus cho nút Search */
+.search-btn:focus {
+    box-shadow: 0 0 10px rgba(181, 181, 105, 0.6);
+    outline: none;
+}
 
 /* Đặt màu chữ cho brand logo */
 .navbar-brand {
-    color: #D0D088 !important; /* Đặt màu chữ cho thương hiệu */
+    color: #d0d088 !important; /* Đặt màu chữ cho thương hiệu */
 }
 
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -30,7 +86,7 @@ body, html {
     padding: 0;
 }
 h1 {
-    font-family: 'Georgia', serif;
+    font-family: "Georgia", serif;
     font-size: 32px;
     font-weight: normal;
     color: #333;
@@ -59,35 +115,34 @@ h1 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
 }
 .bold-text {
     font-weight: bold;
 }
 
-.text-header{
-    font-family: 'Georgia', serif;
+.text-header {
+    font-family: "Georgia", serif;
     font-size: 50px;
 }
 
 .navbar .nav-link {
-    font-size: 18px;               /* Điều chỉnh kích thước chữ */
-    padding: 10px 20px;            /* Tăng khoảng cách bên trong */
-    background-color: white;     /* Đặt màu nền cho nút */
-    color: white;                  /* Màu chữ */
-    border-radius: 0px;            /* Bo tròn các góc */
-    text-align: center;            /* Căn giữa nội dung */
-    text-decoration: none;         /* Xóa gạch chân mặc định */
+    font-size: 18px; /* Điều chỉnh kích thước chữ */
+    padding: 10px 20px; /* Tăng khoảng cách bên trong */
+    background-color: white; /* Đặt màu nền cho nút */
+    color: white; /* Màu chữ */
+    border-radius: 0px; /* Bo tròn các góc */
+    text-align: center; /* Căn giữa nội dung */
+    text-decoration: none; /* Xóa gạch chân mặc định */
 }
 
 .navbar .nav-link:hover {
     /* background-color: #91916e; */
-    text-decoration: underline;    /* Hiển thị gạch chân khi hover */
+    text-decoration: underline; /* Hiển thị gạch chân khi hover */
     text-underline-offset: 40px;
 }
 
 .icon-color {
-    color: #D0D088; /* Màu sắc mà bạn muốn sử dụng cho biểu tượng */
+    color: #d0d088; /* Màu sắc mà bạn muốn sử dụng cho biểu tượng */
 }
 
 .btn-send {
@@ -116,7 +171,7 @@ h1 {
 
 /* CSS */
 .bg-contact-header {
-    background-image: url('./image/contact_bg.jpg'); /* Đường dẫn đến ảnh nền */
+    background-image: url("./image/contact_bg.jpg"); /* Đường dẫn đến ảnh nền */
     background-size: cover; /* Để ảnh phủ toàn bộ */
     background-position: center; /* Căn giữa ảnh nền */
     background-repeat: no-repeat; /* Không lặp lại ảnh */
@@ -132,7 +187,9 @@ h1 {
     background-color: #81883f;
 }
 
-.footer h5, .footer h2, .footer a {
+.footer h5,
+.footer h2,
+.footer a {
     font-family: Georgia, serif;
     color: black;
 }
@@ -150,7 +207,7 @@ h1 {
     max-width: 250px;
 }
 
-.contact-section{
+.contact-section {
     color: #333;
     font-size: 18px;
     font-family: Georgia, serif;
@@ -214,13 +271,12 @@ h1 {
 }
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
-    background-color: #D0D088;
+    background-color: #d0d088;
 }
 
 .dropdown-menu {
     margin-top: 0;
 }
-
 
 /* style cua dung */
 

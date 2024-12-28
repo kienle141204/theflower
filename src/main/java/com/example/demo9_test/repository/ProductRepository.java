@@ -9,5 +9,6 @@ import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
     Optional<Product> findByName(String name);
-
+    // Tìm kiếm sản phẩm theo tên (chứa chuỗi tìm kiếm, không phân biệt chữ hoa/thường)
+    List<Product> findByNameContainingIgnoreCase(String name);
 }

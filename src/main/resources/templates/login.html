@@ -156,7 +156,7 @@
           })
             .then((response) => response.json()) // Chuyển đổi phản hồi thành JSON
             .then((data) => {
-              if (data != 0) {
+              if (data != null) {
                 alert("Đăng nhập thành công");
                 window.location.href = "/home";
               } else {
@@ -164,7 +164,7 @@
               }
             })
             .catch((error) => {
-              alert("Lỗi khi gửi dữ liệu: " + error.message);
+              alert("Đăng nhập thất bại, vui lòng kiểm tra lại thông tin");
             });
         });
     </script>

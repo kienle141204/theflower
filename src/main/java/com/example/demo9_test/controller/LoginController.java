@@ -24,6 +24,9 @@ public class LoginController {
                                               @RequestParam("password") String password,
                                               HttpSession session) {
         User user = userRepository.check_login(email, password);
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         session.setAttribute("email", user.getEmail());
         session.setAttribute("user_id", user.getId());
         session.setAttribute("user_name", user.getName());

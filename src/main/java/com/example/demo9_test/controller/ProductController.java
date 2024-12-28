@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -34,6 +31,13 @@ public class ProductController {
         product.setDescription(product.getDescription().replace("\n", "<br>"));
         return ResponseEntity.ok(product);
     }
+
+    // end point api tim kiem
+    @GetMapping("/api/products/search")
+    public List<Product> searchProducts(@RequestParam("query") String query) {
+        return productRepository.findByNameContainingIgnoreCase(query);
+    }
+
 
 //    @GetMapping("/api/products/test1/{productId}")
 //    public ResponseEntity<Product> test1(@PathVariable("productId") Long productId) {
