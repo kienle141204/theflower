@@ -173,7 +173,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         let subtotal = 0;
-        const order = new FormData();
 
         fetch("api/cart/product")
             .then(response => {
@@ -192,83 +191,25 @@
                         const productCard = document.createElement('div');
                         subtotal += product.price * product.quantity;
                         productCard.innerHTML = `
-                        <div class="cart-item">
-                            <img src="${product.imageUrl}" alt="#">
-                            <div class="item-details">
-                                <h3>${product.name}</h3>
-                                <p>${product.price.toLocaleString('vi-VN')}</p>
-                            </div>
-                            <div class="item-actions">
-                                <button class="remove-btn">Remove</button>
-                                <div class="quantity">
-                                    <button class="decrease">-</button>
-                                    <input type="text" value=${product.quantity}>
-                                    <button class="increase">+</button>
-                                </div>
+                    <div class="cart-item">
+                        <img src="${product.imageUrl}" alt="#">
+                        <div class="item-details">
+                            <h3>${product.name}</h3>
+                            <p>${product.price.toLocaleString('vi-VN')}</p>
+                        </div>
+                        <div class="item-actions">
+                            <button class="remove-btn">Remove</button>
+                            <div class="quantity">
+                                <button class="decrease">-</button>
+                                <input type="text" value=${product.quantity}>
+                                <button class="increase">+</button>
                             </div>
                         </div>
-                    `;
+                    </div>
+                `;
                         container.appendChild(productCard);
 
                         document.getElementById("subtotal").textContent = subtotal.toLocaleString('vi-VN') + ' VND';
-
-                        const checkoutBtn = document.querySelector('.checkout-btn');
-                        checkoutBtn.addEventListener('click', function (event) {
-                            event.preventDefault();
-
-                            const name = document.getElementById('name').value;
-                            const phone = document.getElementById('phone').value;
-                            const address = document.getElementById('address').value;
-
-                            // Tạo mảng chứa thông tin về sản phẩm (tên sản phẩm và số lượng)
-                            const productsWithQuantity = products.map(product => ({
-                                productName: product.name,
-                                quantity: parseInt(document.querySelector(`input[value="${product.quantity}"]`).value) // Lấy số lượng từ input
-                            }));
-
-                            // In ra mảng productsWithQuantity
-                            console.log(productsWithQuantity);
-
-                            fetch('api/cart/checkout', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({
-                                    name: name,
-                                    phone: phone,
-                                    address: address,
-                                    products: productsWithQuantity,
-                                    time: new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' })
-                                }),
-                            })
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error('Mạng bị lỗi!');
-                                    }
-                                    alert("Đặt hàng thành công !!!");
-                                    fetch("api/cart/clear", {
-                                        method: "POST",
-                                    })
-                                        .then(response => {
-                                            if (!response.ok) {
-                                                throw new Error('Lỗi khi xóa sản phẩm khỏi giỏ hàng!');
-                                            }
-
-                                            document.getElementById('cart_items').innerHTML = '';
-                                            document.getElementById('subtotal').textContent = '0 VND';
-                                        })
-                                        .catch(error => {
-                                            console.error("Lỗi khi xóa sản phẩm:", error);
-                                        });
-
-                                })
-
-                                .catch(error => {
-                                    console.error("Error:", error);
-                                    alert("Có lỗi xảy ra khi thanh toán!");
-                                });
-                        });
 
                         // Xử lý sự kiện giảm số lượng
                         productCard.querySelector('.decrease').addEventListener('click', () => {
@@ -314,14 +255,64 @@
                         });
                     });
             })
-
             .catch(error => {
                 console.error('Lỗi khi tải dữ liệu sản phẩm:', error);
             });
+
+        const checkoutBtn = document.querySelector('.checkout-btn');
+        checkoutBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+
+            const productsWithQuantity = Array.from(document.querySelectorAll('.cart-item')).map(productCard => ({
+                productName: productCard.querySelector('h3').textContent,
+                quantity: parseInt(productCard.querySelector('input').value)
+            }));
+
+            fetch('api/cart/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    phone: phone,
+                    address: address,
+                    products: productsWithQuantity,
+                    time: new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' })
+                }),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Mạng bị lỗi!');
+                    }
+                    alert("Đặt hàng thành công !!!");
+                    fetch("api/cart/clear", {
+                        method: "POST",
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Lỗi khi xóa sản phẩm khỏi giỏ hàng!');
+                            }
+
+                            document.getElementById('cart_items').innerHTML = '';
+                            document.getElementById('subtotal').textContent = '0 VND';
+                        })
+                        .catch(error => {
+                            console.error("Lỗi khi xóa sản phẩm:", error);
+                        });
+
+                })
+
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Có lỗi xảy ra khi thanh toán!");
+                });
+        });
     });
-
-
-
 </script>
 <div th:insert="asset :: footer"></div>
 </body>
