@@ -32,7 +32,6 @@ public class CartRepository {
 
 
     public List<CartItem> getData4Cart(Integer user_id) {
-        // Truy vấn lấy thông tin sản phẩm và số lượng từ giỏ hàng
         String sql = "SELECT p.id, p.name, p.price, p.image_url, p.description, ci.quantity " +
                 "FROM products p " +
                 "JOIN cart_item ci ON p.id = ci.product_id " +
@@ -46,17 +45,17 @@ public class CartRepository {
         jdbcTemplate.update(sql, product_id, user_id);
     }
 
-    public void addOrder(String name, String phone_number, String address, JsonNode products, String timeString) {
+    public void addOrder(String name, String phone_number, String address, JsonNode products, String timeString, String note, int user_id, String total) {
         try {
             // Chuyển JsonNode thành String
             ObjectMapper objectMapper = new ObjectMapper();
             String productsJson = objectMapper.writeValueAsString(products);
 
             // Câu lệnh SQL để thêm đơn hàng
-            String sql = "INSERT INTO `order`(user_name, address, phone_number, products, time) VALUES(?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO `order`(user_name, address, phone_number, products, time, note, user_id, total) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
             // Thực hiện câu lệnh SQL
-            jdbcTemplate.update(sql, name, address, phone_number, productsJson, timeString);
+            jdbcTemplate.update(sql, name, address, phone_number, productsJson, timeString, note, user_id, total);
         } catch (Exception e) {
             // Xử lý lỗi nếu có
             e.printStackTrace();

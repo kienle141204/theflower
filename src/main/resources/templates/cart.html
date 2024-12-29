@@ -164,7 +164,10 @@
                 <label for="address">Address *</label>
                 <input type="text" id="address" placeholder="Enter your delivery address" th:value="${address}" required>
 
-                <button class="checkout-btn">CHECK OUT</button>
+                <label for="note">Note</label>
+                <textarea type="text" id="note" placeholder="Enter any special instructions or notes"></textarea>
+
+                <button class="checkout-btn">BUY NOW</button>
             </form>
         </div>
     </div>
@@ -266,6 +269,8 @@
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const address = document.getElementById('address').value;
+            const note = document.getElementById('note').value;
+            const total = subtotal;
 
             const productsWithQuantity = Array.from(document.querySelectorAll('.cart-item')).map(productCard => ({
                 productName: productCard.querySelector('h3').textContent,
@@ -282,7 +287,9 @@
                     phone: phone,
                     address: address,
                     products: productsWithQuantity,
-                    time: new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' })
+                    time: new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' }),
+                    note: note,
+                    total: total
                 }),
             })
                 .then(response => {

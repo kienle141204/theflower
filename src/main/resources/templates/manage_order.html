@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Cá Nhân</title>
+    <link rel="stylesheet" href="/manage_order.css">
+    <style>
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+            color: white;
+        }
+
+        .navbar-left a {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        .navbar-right a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .navbar-right a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-right">
+        <a href="/api/manage_00112299">SHOP</a>
+        <a href="/manage/orders">ORDERS</a>
+    </div>
+</nav>
+
+<div class="order-container" id="orders">
+    <h1>Danh Sách Đơn Hàng</h1>
+
+    <!-- Bảng danh sách đơn hàng -->
+    <table id="orderTable" class="table table-bordered">
+        <thead>
+        <tr>
+            <th style="width: 50px;">ID</th>
+            <th style="width: 150px;">Tên Người Dùng</th>
+            <th style="width: 250px;">Địa Chỉ</th>
+            <th style="width: 150px;">Số Điện Thoại</th>
+            <th style="width: 200px;">Sản Phẩm</th>
+            <th style="width: 180px;">Thời Gian Đặt</th>
+            <th style="width: 120px;">Tổng Tiền</th>
+            <th style="width: 300px;">Lời nhắn</th>
+        </tr>
+
+        </thead>
+        <tbody id="orderTableBody">
+        <!-- Dữ liệu đơn hàng sẽ được chèn vào đây -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+
+    function displayOrderData(orderData) {
+        const tableBody = document.getElementById("orderTableBody");
+
+        // Lặp qua từng đơn hàng và tạo các dòng bảng
+        orderData.forEach(order => {
+            const row = document.createElement("tr");
+
+            const idCell = document.createElement("td");
+            idCell.textContent = order.id;
+            row.appendChild(idCell);
+
+            // Thêm Tên Người Dùng vào cột thứ hai
+            const userNameCell = document.createElement("td");
+            userNameCell.textContent = order.user_name;
+            row.appendChild(userNameCell);
+
+            // Thêm Địa Chỉ vào cột thứ ba
+            const addressCell = document.createElement("td");
+            addressCell.textContent = order.address;
+            row.appendChild(addressCell);
+
+            // Thêm Số Điện Thoại vào cột thứ tư
+            const phoneCell = document.createElement("td");
+            phoneCell.textContent = order.phone_number;
+            row.appendChild(phoneCell);
+
+            // Thêm Sản Phẩm vào cột thứ năm
+            const productCell = document.createElement("td");
+            const aa = order.products;
+            const aaArray = aa.split(",");
+            const jsonString = "[" + aaArray.join(",") + "]";
+            const products = JSON.parse(jsonString);
+            const Products = products[0];
+
+            let productText = '';
+
+            Products.forEach(product => {
+                const productName = product.productName;
+                const quantity = product.quantity;
+                productText += `${productName} - ${quantity}<br>`;
+            });
+            productCell.innerHTML = productText;
+            row.appendChild(productCell);
+
+            // Thêm Thời Gian Đặt vào cột cuối cùng
+            const timeCell = document.createElement("td");
+            timeCell.textContent = order.time;
+            row.appendChild(timeCell);
+
+            const totalCell = document.createElement("td");
+            totalCell.textContent = order.total;
+            row.appendChild(totalCell);
+
+            const noteCell = document.createElement("td");
+            noteCell.textContent = order.note;
+            row.appendChild(noteCell);
+
+            // Thêm dòng vào bảng
+            tableBody.appendChild(row);
+        });
+    }
+
+
+    // Hàm lấy dữ liệu từ server
+    function fetchOrderData() {
+        fetch(`/manage_00112299/orders`)  // Địa chỉ API của bạn
+            .then(response => response.json())
+            .then(data => {
+                // console.log('Dữ liệu đơn hàng:', data);  // Kiểm tra dữ liệu trả về
+                displayOrderData(data);
+            })
+            .catch(error => {
+                console.error('Error fetching order data:', error);
+            });
+    }
+
+
+    window.onload = fetchOrderData;
+
+</script>
+</body>
+</html>

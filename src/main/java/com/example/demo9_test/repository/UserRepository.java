@@ -50,5 +50,10 @@ public class UserRepository {
         }
     }
 
+    public void updateProfile(int user_id,String name, String phone_number, String address) {
+        String sql = "UPDATE user SET name = ?, phone_number = ?, address = ? WHERE id = ?";
+        jdbcTemplate.update(sql, name, phone_number, address, user_id);
+    }
+
 
 }

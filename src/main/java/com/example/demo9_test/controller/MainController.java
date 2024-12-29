@@ -43,11 +43,19 @@ public class MainController
     }
 
     @GetMapping ("/buy/{productId}")
-    public String showProductDetails(@PathVariable("productId") Long productId, Model model) {
+    public String showProductDetails(@PathVariable("productId") Long productId, Model model, HttpSession session) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Sản phẩm không tồn tại"));
         model.addAttribute("product", product);
-        return "product"; // Trang chi tiết sản phẩm
+
+        String userName = (String) session.getAttribute("user_name");
+        String phoneNumber = (String) session.getAttribute("phone_number");
+        String address = (String) session.getAttribute("address");
+
+        model.addAttribute("user_name", userName);
+        model.addAttribute("phone_number", phoneNumber);
+        model.addAttribute("address", address);
+        return "product";
     }
 
     @GetMapping("/login")
@@ -75,6 +83,24 @@ public class MainController
         model.addAttribute("phone_number", phoneNumber);
         model.addAttribute("address", address);
         return "cart";
+    }
+
+    @GetMapping("/profile")
+    public String profile(Model model, HttpSession session) {
+        String userName = (String) session.getAttribute("user_name");
+        String phoneNumber = (String) session.getAttribute("phone_number");
+        String address = (String) session.getAttribute("address");
+
+        model.addAttribute("user_name", userName);
+        model.addAttribute("phone_number", phoneNumber);
+        model.addAttribute("address", address);
+        return "profile";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "/login";
     }
 
 }

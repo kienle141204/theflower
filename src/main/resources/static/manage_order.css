@@ -1,0 +1,83 @@
+/* Cấu hình chung cho toàn bộ trang */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container chứa bảng */
+.order-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề */
+.order-container h1 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+}
+
+/* Bảng danh sách đơn hàng */
+#orderTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Các ô trong bảng */
+#orderTable th, #orderTable td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+/* Định dạng tiêu đề cột */
+#orderTable th {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+}
+
+/* Định dạng các dòng trong bảng */
+#orderTable td {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Định dạng cột sản phẩm */
+#orderTable td:nth-child(5) {
+    word-wrap: break-word;
+}
+
+/* Hover hiệu ứng cho các dòng */
+#orderTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Thêm một số khoảng cách cho các dòng */
+#orderTable tbody tr {
+    transition: background-color 0.3s;
+}
+
+/* Thêm một số khoảng cách cho bảng */
+#orderTable {
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Định dạng cho các ô chứa thông tin sản phẩm */
+#orderTable td:nth-child(5) {
+    word-wrap: break-word;
+}
+
+/* Định dạng cho các dòng trong bảng khi hover */
+#orderTable tr:hover {
+    background-color: #f9f9f9;
+}

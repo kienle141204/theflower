@@ -8,11 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 
 @Controller
 public class ManageController {
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private manageRepository ManageRepository;
 
     @GetMapping("/api/manage_00112299")
     public String shopManage() {
@@ -30,5 +36,29 @@ public class ManageController {
                 .orElseThrow(() -> new RuntimeException("Sản phẩm không tồn tại"));
         model.addAttribute("manage_product", product);
         return "manage_product";
+    }
+
+    @GetMapping("/manage/orders")
+    public String getOrders(Model model) {
+//        // Lấy danh sách đơn hàng từ dịch vụ
+//        List<Map<String, Object>> orders = ManageRepository.getAllOrders();
+//
+//        System.out.println("Danh sách đơn hàng: ");
+//        for (Map<String, Object> order : orders) {
+//            System.out.println(order);
+//        }
+//
+//        // Thêm dữ liệu vào model để hiển thị trên trang
+//        model.addAttribute("orders", orders);
+
+        return "manage_order"; // Trả về tên view (orderList.html)
+    }
+
+    @GetMapping("/manage_00112299/orders")
+    @ResponseBody
+    public List<Map<String, Object>> getOrder() {
+        List<Map<String, Object>> orders = ManageRepository.getAllOrders();
+        System.out.println(orders);
+        return orders; // Spring tự động chuyển đổi thành JSON
     }
 }

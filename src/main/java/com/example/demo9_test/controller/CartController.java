@@ -49,10 +49,12 @@ public class CartController {
         String address = checkout.get("address").asText();
         String phone = checkout.get("phone").asText();
         String timeString = checkout.get("time").asText();
+        String note = checkout.get("note").asText();
+        String total = checkout.get("total").asText();
 
         JsonNode products = checkout.get("products");
 
-        cartRepository.addOrder(name, address, phone, products, timeString);
+        cartRepository.addOrder(name, address, phone, products, timeString, note, user_id, total);
     }
 
     @PostMapping("/api/cart/clear")
