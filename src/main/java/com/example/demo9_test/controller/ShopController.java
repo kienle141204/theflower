@@ -16,8 +16,6 @@ public class ShopController {
 
     @Autowired
     private shopRepository shopRepository;
-//    @Autowired
-//    private CartRepository cartRepository ;
     @GetMapping("/shop_all")
     public List<Product> getAllProducts() {
         return shopRepository.findAll();
@@ -27,54 +25,6 @@ public class ShopController {
     public List<Product> getProductsByCategory(@PathVariable String category) {
         return shopRepository.getData(category);
     }
-//    @GetMapping("/{id}")
-//    public void addProduct(@PathVariable Long id) {
-//        Cart cart = new Cart() ;
-//        cart.setId(id) ;
-//        cartRepository.save(cart);
-//    }
-
-//    // API cho Plants
-//    @GetMapping("/plants")
-//    public List<Product> getDataPlants() {
-//        return shopRepository.getDataPlants();
-//    }
-//
-//    // API cho Mixed Bouquets
-//    @GetMapping("/mixed_bouquets")
-//    public List<Product> getDataMixedBouquets() {
-//        return shopRepository.getDataMixedBouquets();
-//    }
-//
-//    // API cho Christmas
-//    @GetMapping("/christmas")
-//    public List<Product> getDataChristmas() {
-//        return shopRepository.getDataChristmas();
-//    }
-//
-//    // API cho One of a Kind
-//    @GetMapping("/one_of_a_kind")
-//    public List<Product> getDataOneOfAKind() {
-//        return shopRepository.getDataOneOfAKind();
-//    }
-//
-//    // API cho Seasonal
-//    @GetMapping("/seasonal")
-//    public List<Product> getDataSeasonal() {
-//        return shopRepository.getDataSeasonal();
-//    }
-//
-//    // API cho Special Occasion
-//    @GetMapping("/special_occasion")
-//    public List<Product> getDataSpecialOccasion() {
-//        return shopRepository.getDataSpecialOccasion();
-//    }
-//
-//    // API cho Food and Drinks
-//    @GetMapping("/food_drinks")
-//    public List<Product> getDataFoodDrinks() {
-//        return shopRepository.getDataFoodDrinks();
-//    }
 
     @GetMapping("/sale_out/{name}")
     public List<Product> saleOutProduct(@PathVariable String name) {

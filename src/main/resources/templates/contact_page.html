@@ -69,12 +69,7 @@
 <!-- contact -->
 <div class="container my-5" style="max-width: 500px;">
     <h2 class="text-center my-5" style="font-family: 'Georgia', serif;color:gray">We'd love to hear from you</h2>
-    <div th:if="${message}">
-        <div class="alert alert-light mx-3 mt-4 mb-4" role="alert">
-            <span th:text="${message}"></span>
-        </div>
-    </div>
-    <form action="/submit-form" method="POST">
+    <form>
         <!-- Full Name -->
         <div class="mb-3">
             <label for="name" class="form-label visually-hidden">Full Name</label>
@@ -100,13 +95,41 @@
         </div>
 
         <!-- Send Button -->
-        <button type="submit" class="btn btn-send">SEND</button>
+        <button type="submit" class="btn btn-send" id="submit">SEND</button>
     </form>
 </div>
 
 <div th:insert="asset :: footer"></div>
 <!-- js -->
 <script src="/bootstrap.bundle.js"></script>
+<script>
+    document.getElementById("submit").addEventListener("click", () => {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const message = document.getElementById('message').value;
+
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("phone", phone);
+        formData.append("message", message);
+        fetch("/submit-form", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => {
+                alert("Gửi thành công!!!")
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error("Lỗi khi đăng xuất:", error);
+                alert("Có lỗi xảy ra khi đăng xuất.");
+            });
+    });
+</script>
 </body>
 
 </html>

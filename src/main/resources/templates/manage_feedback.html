@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Cards</title>
+    <link rel="stylesheet" href="/manage_order.css">
+    <link rel="stylesheet" href="/manageShop.css">
+
+    <style>
+        .feedback-container {
+            display: block;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .feedback-card {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+        }
+
+        .feedback-card h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .feedback-item {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .feedback-item strong {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-right">
+        <a href="/api/manage_00112299">SHOP</a>
+        <a href="/api/manage/orders">ORDERS</a>
+        <a href="/api/manage/feedback">FEEDBACKS</a>
+    </div>
+</nav>
+<div class="feedback-container" id="feedback-container">
+    <!-- Các feedback sẽ được thêm vào đây -->
+</div>
+
+<script>
+    // Hàm Card để hiển thị các phản hồi
+    function Card(feedbacks) {
+        const container = document.getElementById('feedback-container');
+        feedbacks.forEach(feedback => {
+            // Tạo một thẻ feedback-card
+            const card = document.createElement("div");
+            card.classList.add("feedback-card");
+
+            // Thêm thông tin của từng feedback
+            const name = document.createElement("div");
+            name.classList.add("feedback-item");
+            name.innerHTML = `<strong>Name:</strong> ${feedback.name}`;
+            card.appendChild(name);
+
+            const phone = document.createElement("div");
+            phone.classList.add("feedback-item");
+            phone.innerHTML = `<strong>Phone:</strong> ${feedback.phone}`;
+            card.appendChild(phone);
+
+            const email = document.createElement("div");
+            email.classList.add("feedback-item");
+            email.innerHTML = `<strong>Email:</strong> ${feedback.email}`;
+            card.appendChild(email);
+
+            const message = document.createElement("div");
+            message.classList.add("feedback-item");
+            message.innerHTML = `<strong>Message:</strong> ${feedback.message}`;
+            card.appendChild(message);
+
+            // Thêm card vào container
+            container.appendChild(card);
+        });
+    }
+
+    function fetchFBData() {
+        fetch("/manage_00112299/feedback")  // Địa chỉ API của bạn
+            .then(response => response.json())
+            .then(data => {
+                Card(data);
+            })
+            .catch(error => {
+                console.error('Error fetching order data:', error);
+            });
+    }
+
+    window.onload = fetchFBData;
+</script>
+</body>
+</html>

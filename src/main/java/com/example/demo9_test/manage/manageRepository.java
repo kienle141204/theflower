@@ -1,5 +1,6 @@
 package com.example.demo9_test.manage;
 
+import com.example.demo9_test.entity.ContactForm;
 import com.example.demo9_test.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -30,6 +31,12 @@ public class manageRepository {
         String sql = "SELECT id, user_name, address, phone_number, products,`time`, total, note FROM `order`";
 
         return jdbcTemplate.queryForList(sql);
+    }
+
+    public List<ContactForm> getFeedback(){
+        String sql = "SELECT * FROM feedback ORDER BY id DESC LIMIT 5";
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ContactForm.class));
     }
 
 }

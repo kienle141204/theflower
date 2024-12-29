@@ -46,9 +46,12 @@
 </div>
 
 <div class="logout-container">
-    <button id="logout" class="logout-btn">LOG OUT</button>
+    <button id="login" class="logout-btn">LOG IN</button>
 </div>
 
+<div class="logout-container">
+    <button id="logout" class="logout-btn">LOG OUT</button>
+</div>
 <script>
     document.getElementById("submit").addEventListener("click", () => {
         const name = document.getElementById("name").value;
@@ -90,6 +93,9 @@
                 console.error("Lỗi khi đăng xuất:", error);
                 alert("Có lỗi xảy ra khi đăng xuất.");
             });
+    });
+    document.getElementById("login").addEventListener("click", () => {
+        window.location.href = "/login";
     });
 
     /////////////////////////////////////////////////

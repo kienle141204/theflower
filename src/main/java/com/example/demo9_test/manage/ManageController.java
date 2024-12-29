@@ -1,5 +1,6 @@
 package com.example.demo9_test.manage;
 
+import com.example.demo9_test.entity.ContactForm;
 import com.example.demo9_test.entity.Product;
 import com.example.demo9_test.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +40,7 @@ public class ManageController {
         return "manage_product";
     }
 
-    @GetMapping("/manage/orders")
+    @GetMapping("/api/manage/orders")
     public String getOrders(Model model) {
 //        // Lấy danh sách đơn hàng từ dịch vụ
 //        List<Map<String, Object>> orders = ManageRepository.getAllOrders();
@@ -60,5 +62,17 @@ public class ManageController {
         List<Map<String, Object>> orders = ManageRepository.getAllOrders();
         System.out.println(orders);
         return orders; // Spring tự động chuyển đổi thành JSON
+    }
+
+    @GetMapping("/manage_00112299/feedback")
+    @ResponseBody
+    public List<ContactForm> getFeedback(){
+        List<ContactForm> feedback = ManageRepository.getFeedback();
+        return feedback;
+    }
+
+    @GetMapping("/api/manage/feedback")
+    public String fb(){
+        return "manage_feedback";
     }
 }

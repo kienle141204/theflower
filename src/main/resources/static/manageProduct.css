@@ -23,3 +23,9 @@ body {
     box-shadow: 0 0 5px #A6A15B; 
     border-radius: 5px; 
 }
+body {
+    font-family: "Comic Sans MS", cursive;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
