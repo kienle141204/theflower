@@ -16,6 +16,8 @@ body {
 /* Style cho thanh tìm kiếm */
 .search-bar {
     background-color: #dbdba9;
+    width: 230px;
+    height: 50px;
     border-radius: 25px;
     padding: 5px 10px;
     align-items: center;
@@ -542,4 +544,39 @@ ul li a:hover {
     padding-top: 20px;
     margin-top: 20px;
     font-size: 14px;
+}
+/* Nút Quick Add */
+.btn-quick-add {
+  flex: 3;
+  background-color: #878734;
+  color: white;
+  font-size: 1.2rem;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-quick-add:hover {
+  background-color: #646427;
+  transform: scale(1.05);
+}
+
+/* Nút Buy Now */
+.btn-buy-now {
+  flex: 7;
+  background-color: #747442;
+  color: white;
+  font-size: 1.2rem;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-buy-now:hover {
+  background-color: #5c5c35;
+  transform: scale(1.05);
 }

@@ -1,66 +1,65 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- style -->
-    <link rel="stylesheet" href="/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap.min.css" />
     <!-- link icon -->
-    <link rel="stylesheet" href="/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/font/bootstrap-icons.min.css" />
     <!-- font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <title>Profile</title>
-    <link rel="stylesheet" href="/profile.css">
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/home.css">
-</head>
-<body>
-
-<div th:insert="navbar :: navbar"></div>
-<div class="profile-container" id="profile">
-    <h1>Trang Cá Nhân</h1>
-    <div class="profile-info">
+    <link rel="stylesheet" href="/profile.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/home.css" />
+  </head>
+  <body>
+    <div th:insert="navbar :: navbar"></div>
+    <div class="profile-container" id="profile">
+      <h1>Profile</h1>
+      <div class="profile-info">
         <div class="profile-item">
-            <label for="name">Tên:</label>
-            <input type="text" id="name" th:value="${user_name}" >
+          <label for="name">Name:</label>
+          <input type="text" id="name" th:value="${user_name}" />
         </div>
         <div class="profile-item">
-            <label for="phone">Số điện thoại:</label>
-            <input type="text" id="phone" th:value="${phone_number}" >
+          <label for="phone">Phone number:</label>
+          <input type="text" id="phone" th:value="${phone_number}" />
         </div>
         <div class="profile-item">
-            <label for="address">Địa chỉ:</label>
-            <input type="text" id="address" th:value="${address}" >
+          <label for="address">Address:</label>
+          <input type="text" id="address" th:value="${address}" />
         </div>
 
         <div class="submit-section">
-            <button id="submit">Lưu Thông Tin</button>
+          <button id="submit">Save</button>
         </div>
+      </div>
     </div>
-</div>
 
-<div class="order-container" id="orders">
-    <h1>Danh Sách Đơn Hàng</h1>
-    <div id="orderTableBody"></div>
-</div>
+    <div class="order-container" id="orders">
+      <h1>Order list</h1>
+      <div id="orderTableBody"></div>
+    </div>
 
-<div class="logout-container">
-    <button id="login" class="logout-btn">LOG IN</button>
-</div>
+    <div class="logout-container">
+      <button id="login" class="logout-btn">LOG IN</button>
+    </div>
 
-<div class="logout-container">
-    <button id="logout" class="logout-btn">LOG OUT</button>
-</div>
-<script>
-    document.getElementById("submit").addEventListener("click", () => {
+    <div class="logout-container">
+      <button id="logout" class="logout-btn">LOG OUT</button>
+    </div>
+    <script>
+      document.getElementById("submit").addEventListener("click", () => {
         const name = document.getElementById("name").value;
         const phone = document.getElementById("phone").value;
         const address = document.getElementById("address").value;
 
         if (!name || !phone || !address) {
-            alert("Vui lòng điền đầy đủ thông tin!");
-            return;
+          alert("Vui lòng điền đầy đủ thông tin!");
+          return;
         }
 
         const formData = new FormData();
@@ -69,98 +68,98 @@
         formData.append("address", address);
 
         fetch(`/api/profile/update`, {
-            method: "POST",
-            body: formData,
+          method: "POST",
+          body: formData,
         })
-            .then(response => response.text())
-            .then(data => {
-                alert(data);
-            })
-            .catch(error => {
-                console.error("Lỗi:", error);
-                alert("Có lỗi xảy ra");
-            });
-    });
+          .then((response) => response.text())
+          .then((data) => {
+            alert(data);
+          })
+          .catch((error) => {
+            console.error("Lỗi:", error);
+            alert("Có lỗi xảy ra");
+          });
+      });
 
-    document.getElementById("logout").addEventListener("click", () => {
+      document.getElementById("logout").addEventListener("click", () => {
         fetch("/logout", {
-            method: "GET",
+          method: "GET",
         })
-            .then(response => {
-                window.location.href = "/login";
-            })
-            .catch(error => {
-                console.error("Lỗi khi đăng xuất:", error);
-                alert("Có lỗi xảy ra khi đăng xuất.");
-            });
-    });
-    document.getElementById("login").addEventListener("click", () => {
+          .then((response) => {
+            window.location.href = "/login";
+          })
+          .catch((error) => {
+            console.error("Lỗi khi đăng xuất:", error);
+            alert("Có lỗi xảy ra khi đăng xuất.");
+          });
+      });
+      document.getElementById("login").addEventListener("click", () => {
         window.location.href = "/login";
-    });
+      });
 
-    /////////////////////////////////////////////////
-    /////////////////////////////////////////////////
+      /////////////////////////////////////////////////
+      /////////////////////////////////////////////////
 
-    function displayOrderData(orderData) {
+      function displayOrderData(orderData) {
         const tableBody = document.getElementById("orderTableBody");
 
         // Lặp qua từng đơn hàng và tạo các dòng bảng
-        orderData.forEach(order => {
-            // Tạo một thẻ div cho mỗi đơn hàng
-            const orderCard = document.createElement("div");
-            orderCard.classList.add("order-card");
+        orderData.forEach((order) => {
+          // Tạo một thẻ div cho mỗi đơn hàng
+          const orderCard = document.createElement("div");
+          orderCard.classList.add("order-card");
 
-            // Cập nhật ngày đặt hàng
-            const orderHeader = document.createElement("div");
-            orderHeader.classList.add("order-header");
-            orderHeader.innerHTML = `<span class="order-date">Ngày Đặt: ${order.time}</span>`;
+          // Cập nhật ngày đặt hàng
+          const orderHeader = document.createElement("div");
+          orderHeader.classList.add("order-header");
+          orderHeader.innerHTML = `<span class="order-date">Order time: ${order.time}</span>`;
 
-            const orderItems = document.createElement("div");
-            const products = order.products;
-            const productsArr = products.split(",");
-            const jsonString = "[" + productsArr.join(",") + "]";
-            const ttt = JSON.parse(jsonString);
-            const items = ttt[0];
+          const orderItems = document.createElement("div");
+          const products = order.products;
+          const productsArr = products.split(",");
+          const jsonString = "[" + productsArr.join(",") + "]";
+          const ttt = JSON.parse(jsonString);
+          const items = ttt[0];
 
-            orderItems.classList.add("order-items");
+          orderItems.classList.add("order-items");
 
-            let productText = '';
+          let productText = "";
 
-            items.forEach(product => {
-                const productName = product.productName;
-                const quantity = product.quantity;
-                productText += `${productName} - x${quantity}<br>`;
-            });
-            orderItems.innerHTML = productText;
+          items.forEach((product) => {
+            const productName = product.productName;
+            const quantity = product.quantity;
+            productText += `${productName} - x${quantity}<br>`;
+          });
+          orderItems.innerHTML = productText;
 
-            // Tạo phần footer với tổng tiền
-            const orderFooter = document.createElement("div");
-            orderFooter.classList.add("order-footer");
-            orderFooter.innerHTML = `<span class="total-price">Tổng Tiền: ${order.total}</span>`;
+          // Tạo phần footer với tổng tiền
+          const orderFooter = document.createElement("div");
+          orderFooter.classList.add("order-footer");
+          orderFooter.innerHTML = `<span class="total-price">Total: ${order.total}</span>`;
 
-            // Thêm các phần tử vào thẻ đơn hàng
-            orderCard.appendChild(orderHeader);
-            orderCard.appendChild(orderItems);
-            orderCard.appendChild(orderFooter);
+          // Thêm các phần tử vào thẻ đơn hàng
+          orderCard.appendChild(orderHeader);
+          orderCard.appendChild(orderItems);
+          orderCard.appendChild(orderFooter);
 
-            // Thêm thẻ đơn hàng vào tableBody
-            tableBody.appendChild(orderCard);
+          // Thêm thẻ đơn hàng vào tableBody
+          tableBody.appendChild(orderCard);
         });
-    }
+      }
 
-    // Hàm lấy dữ liệu từ server
-    function fetchOrderData() {
-        fetch("/orders/profile")  // Địa chỉ API của bạn
-            .then(response => response.json())
-            .then(data => {
-                displayOrderData(data);
-            })
-            .catch(error => {
-                console.error('Error fetching order data:', error);
-            });
-    }
+      // Hàm lấy dữ liệu từ server
+      function fetchOrderData() {
+        fetch("/orders/profile") // Địa chỉ API của bạn
+          .then((response) => response.json())
+          .then((data) => {
+            displayOrderData(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching order data:", error);
+          });
+      }
 
-    window.onload = fetchOrderData;
-</script>
-</body>
+      window.onload = fetchOrderData;
+    </script>
+  </body>
 </html>

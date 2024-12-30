@@ -1,115 +1,154 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- style -->
-    <link rel="stylesheet" href="/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap.min.css" />
     <!-- link icon -->
-    <link rel="stylesheet" href="/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/font/bootstrap-icons.min.css" />
     <!-- font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet"> -->
 
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style.css" />
 
     <title>Contact</title>
-</head>
-<body>
-<div class="div0">
-    <p>
+  </head>
+  <body>
+    <div class="div0">
+      <p>
         Order
         <strong>before 1pm</strong>
         for same day delivery!
-    </p>
-</div>
-
-<div th:insert="navbar :: navbar"></div>
-<!-- header -->
-<div>
-    <ul class="list-unstyled color-custom text-white mb-0 bg-contact-header" >
-        <li class="text-center display-4 text-header" style="padding-top:100px;padding-bottom: 100px;">
-            Contact us
-        </li>
-    </ul>
-</div>
-<!-- end header -->
-<!--  -->
-<div class="contact-section bg-light py-5">
-    <div class="container">
-        <div class="row text-center">
-            <!-- Email -->
-            <div class="col-md-4 mb-4">
-                <div class="contact-icon pb-3">
-                    <i class="bi bi-envelope"></i>
-                </div>
-                <p class="contact-info">info@theflowerweb.com.au</p>
-            </div>
-
-            <!-- Phone -->
-            <div class="col-md-4 mb-4">
-                <div class="contact-icon pb-3">
-                    <i class="bi bi-telephone"></i>
-                </div>
-                <p class="contact-info">+61 427 184 951</p>
-            </div>
-
-            <!-- Address -->
-            <div class="col-md-4 mb-4">
-                <div class="contact-icon pb-3">
-                    <i class="bi bi-geo-alt"></i>
-                </div>
-                <p class="contact-info">Visit any of our stores in Adelaide</p>
-            </div>
-        </div>
+      </p>
     </div>
-</div>
-<!--  -->
-<!-- contact -->
-<div class="container my-5" style="max-width: 500px;">
-    <h2 class="text-center my-5" style="font-family: 'Georgia', serif;color:gray">We'd love to hear from you</h2>
-    <form>
+
+    <div th:insert="navbar :: navbar"></div>
+    <!-- header -->
+    <div>
+      <ul class="list-unstyled color-custom text-white mb-0 bg-contact-header">
+        <li
+          class="text-center display-4 text-header"
+          style="padding-top: 100px; padding-bottom: 100px"
+        >
+          Contact us
+        </li>
+      </ul>
+    </div>
+    <!-- end header -->
+    <!--  -->
+    <div class="contact-section bg-light py-5">
+      <div class="container">
+        <div class="row text-center">
+          <!-- Email -->
+          <div class="col-md-4 mb-4">
+            <div class="contact-icon pb-3">
+              <i class="bi bi-envelope"></i>
+            </div>
+            <p class="contact-info">gmail@gmail.com</p>
+          </div>
+
+          <!-- Phone -->
+          <div class="col-md-4 mb-4">
+            <div class="contact-icon pb-3">
+              <i class="bi bi-telephone"></i>
+            </div>
+            <p class="contact-info">+84 988 888 888</p>
+          </div>
+
+          <!-- Address -->
+          <div class="col-md-4 mb-4">
+            <div class="contact-icon pb-3">
+              <i class="bi bi-geo-alt"></i>
+            </div>
+            <p class="contact-info">Visit any of our stores in Hanoi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <!-- contact -->
+    <div class="container my-5" style="max-width: 500px">
+      <h2
+        class="text-center my-5"
+        style="font-family: 'Georgia', serif; color: gray"
+      >
+        We'd love to hear from you
+      </h2>
+      <form>
         <!-- Full Name -->
         <div class="mb-3">
-            <label for="name" class="form-label visually-hidden">Full Name</label>
-            <input type="text" class="form-control" id="name" name="name" required placeholder="Full Name">
+          <label for="name" class="form-label visually-hidden">Full Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            required
+            placeholder="Full Name"
+          />
         </div>
 
         <!-- Email -->
         <div class="mb-3">
-            <label for="email" class="form-label visually-hidden">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required placeholder="Email">
+          <label for="email" class="form-label visually-hidden">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            required
+            placeholder="Email"
+          />
         </div>
 
         <!-- Phone Number -->
         <div class="mb-3">
-            <label for="phone" class="form-label visually-hidden">Phone Number</label>
-            <input type="tel" class="form-control" id="phone" name="phone" required placeholder="Phone Number">
+          <label for="phone" class="form-label visually-hidden"
+            >Phone Number</label
+          >
+          <input
+            type="tel"
+            class="form-control"
+            id="phone"
+            name="phone"
+            required
+            placeholder="Phone Number"
+          />
         </div>
 
         <!-- Message -->
         <div class="mb-3">
-            <label for="message" class="form-label visually-hidden">Message</label>
-            <textarea class="form-control" id="message" name="message" rows="4" placeholder="Message"></textarea>
+          <label for="message" class="form-label visually-hidden"
+            >Message</label
+          >
+          <textarea
+            class="form-control"
+            id="message"
+            name="message"
+            rows="4"
+            placeholder="Message"
+          ></textarea>
         </div>
 
         <!-- Send Button -->
         <button type="submit" class="btn btn-send" id="submit">SEND</button>
-    </form>
-</div>
+      </form>
+    </div>
 
-<div th:insert="asset :: footer"></div>
-<!-- js -->
-<script src="/bootstrap.bundle.js"></script>
-<script>
-    document.getElementById("submit").addEventListener("click", () => {
+    <div th:insert="asset :: footer"></div>
+    <!-- js -->
+    <script src="/bootstrap.bundle.js"></script>
+    <script>
+      document.getElementById("submit").addEventListener("click", () => {
         event.preventDefault();
 
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const phone = document.getElementById('phone').value;
-        const message = document.getElementById('message').value;
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const message = document.getElementById("message").value;
 
         const formData = new FormData();
         formData.append("name", name);
@@ -117,19 +156,18 @@
         formData.append("phone", phone);
         formData.append("message", message);
         fetch("/submit-form", {
-            method: "POST",
-            body: formData
+          method: "POST",
+          body: formData,
         })
-            .then(response => {
-                alert("Gửi thành công!!!")
-                window.location.reload();
-            })
-            .catch(error => {
-                console.error("Lỗi khi đăng xuất:", error);
-                alert("Có lỗi xảy ra khi đăng xuất.");
-            });
-    });
-</script>
-</body>
-
+          .then((response) => {
+            alert("Gửi thành công!!!");
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error("Lỗi khi đăng xuất:", error);
+            alert("Có lỗi xảy ra khi đăng xuất.");
+          });
+      });
+    </script>
+  </body>
 </html>

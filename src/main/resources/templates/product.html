@@ -1,202 +1,248 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- style -->
-    <link rel="stylesheet" href="/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap.min.css" />
     <!-- link icon -->
-    <link rel="stylesheet" href="/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/font/bootstrap-icons.min.css" />
     <!-- font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <title>Danh sách sản phẩm</title>
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/home.css">
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/home.css" />
     <style>
-        /* Popup styles */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            display: none;
-        }
+      /* Popup styles */
+      .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        display: none;
+      }
 
-        .popup-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: left;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 600px;
-            width: 90%;
-            overflow-y: auto;
-            max-height: 80%;
-        }
+      .popup-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: left;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 600px;
+        width: 90%;
+        overflow-y: auto;
+        max-height: 80%;
+      }
 
-        .cart-items, .cart-summary {
-            margin-bottom: 20px;
-        }
+      .cart-items,
+      .cart-summary {
+        margin-bottom: 20px;
+      }
 
-        .cart-items h2, .cart-summary h2 {
-            margin-bottom: 10px;
-        }
+      .cart-items h2,
+      .cart-summary h2 {
+        margin-bottom: 10px;
+      }
 
-        .cart-items div, .cart-summary div {
-            margin-bottom: 10px;
-        }
+      .cart-items div,
+      .cart-summary div {
+        margin-bottom: 10px;
+      }
 
-        .popup-content button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+      .popup-content button {
+        padding: 10px 20px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
-        .popup-content button:hover {
-            background-color: #0056b3;
-        }
+      form label {
+        display: block;
+        margin-bottom: 5px;
+      }
 
-        form label {
-            display: block;
-            margin-bottom: 5px;
-        }
+      form input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
 
-        form input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+      .checkout-btn {
+        background-color: #caca74;
+      }
 
-        .checkout-btn {
-            background-color: #28a745;
-        }
-
-        .checkout-btn:hover {
-            background-color: #218838;
-        }
-
+      .checkout-btn:hover {
+        background-color: #8a8a50;
+      }
+      .cls-btn {
+        background-color: #caca74;
+      }
+      .cls-btn:hover {
+        background-color: #8a8a50;
+      }
     </style>
-</head>
-<body>
-<div class="notifi-mes">
-    Order <strong>before 1pm</strong> for same day delivery
-</div>
-
-<div th:insert="navbar :: navbar" style="background-color: white"></div>
-
-<div class="px-5 py-5" style="background-color: rgb(234, 234, 234);">
-    <div class="row">
-        <div class="col-md-6">
-            <img class="img-fluid border rounded" id="product-img" />
-        </div>
-        <div class="col-md-6" style="background-color: white; padding-left: 100px; padding-right: 100px">
-            <h1 class="product-title py-5" id="product-name"></h1>
-            <p class="product-price" id="product-price" style="font-size: 20px"></p>
-            <div class="flower-description">
-                <div class="product-option">
-                    <label for="size">Size</label>
-                    <select id="size">
-                        <option>Standard</option>
-                        <option>Large</option>
-                    </select>
-                </div>
-                <div class="quantity-add">
-                    <select class="quantity-select" id="quantity-select">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
-                    <button class="add-to-cart">BUY</button>
-                </div>
-                <div id="product-des" class="my-5">
-                </div>
-            </div>
-        </div>
-
+  </head>
+  <body>
+    <div class="notifi-mes">
+      Order <strong>before 1pm</strong> for same day delivery
     </div>
-</div>
 
-<!-- Popup HTML -->
-<div class="popup-overlay" id="popupOverlay">
-    <div class="popup-content">
+    <div th:insert="navbar :: navbar" style="background-color: white"></div>
+
+    <div class="px-5 py-5" style="background-color: rgb(234, 234, 234)">
+      <div class="row">
+        <div class="col-md-6">
+          <img class="img-fluid border rounded" id="product-img" />
+        </div>
+        <div
+          class="col-md-6"
+          style="
+            background-color: white;
+            padding-left: 100px;
+            padding-right: 100px;
+          "
+        >
+          <h1 class="product-title py-5" id="product-name"></h1>
+          <p
+            class="product-price"
+            id="product-price"
+            style="font-size: 20px"
+          ></p>
+          <div class="flower-description">
+            <div class="product-option">
+              <label for="size">Size</label>
+              <select id="size">
+                <option>Standard</option>
+                <option>Large</option>
+              </select>
+            </div>
+            <div class="quantity-add">
+              <select class="quantity-select" id="quantity-select">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+              <button class="add-to-cart">BUY</button>
+            </div>
+            <div id="product-des" class="my-5"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup HTML -->
+    <div class="popup-overlay" id="popupOverlay">
+      <div class="popup-content">
         <!-- Cart Items Section -->
         <div class="cart-items">
-            <h2>BUY</h2>
-            <div id="cart_items">
-                <!-- Danh sách sản phẩm sẽ được thêm tại đây -->
-            </div>
+          <h2>BUY</h2>
+          <div id="cart_items">
+            <!-- Danh sách sản phẩm sẽ được thêm tại đây -->
+          </div>
         </div>
 
         <!-- Cart Summary Section -->
         <div class="cart-summary">
-            <h2>Checkout Details</h2>
-            <div class="price" id="subtotal"></div>
-            <div class="delivery">
-                <form>
-                    <label for="name">Name *</label>
-                    <input type="text" id="name" placeholder="Enter your name" th:value="${user_name}" required>
+          <h2>Checkout Details</h2>
+          <div class="price" id="subtotal"></div>
+          <div class="delivery">
+            <form>
+              <label for="name">Name *</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter your name"
+                th:value="${user_name}"
+                required
+              />
 
-                    <label for="phone">Phone Number *</label>
-                    <input type="text" id="phone" placeholder="Enter your phone number" th:value="${phone_number}" required>
+              <label for="phone">Phone Number *</label>
+              <input
+                type="text"
+                id="phone"
+                placeholder="Enter your phone number"
+                th:value="${phone_number}"
+                required
+              />
 
-                    <label for="address">Address *</label>
-                    <input type="text" id="address" placeholder="Enter your delivery address" th:value="${address}" required>
+              <label for="address">Address *</label>
+              <input
+                type="text"
+                id="address"
+                placeholder="Enter your delivery address"
+                th:value="${address}"
+                required
+              />
 
-                    <label for="note">Note</label>
-                    <textarea type="text" id="note" placeholder="Enter any special instructions or notes" style="width: 100%;padding-bottom: 20px; margin-bottom: 20px"></textarea>
+              <label for="note">Note</label>
+              <textarea
+                type="text"
+                id="note"
+                placeholder="Enter any special instructions or notes"
+                style="width: 100%; padding-bottom: 20px; margin-bottom: 20px"
+              ></textarea>
 
-                    <button type="button" class="checkout-btn" id="checkoutBtn">BUY NOW</button>
-                </form>
-
-            </div>
+              <button
+                type="button"
+                class="checkout-btn bn-btn"
+                id="checkoutBtn"
+              >
+                BUY NOW
+              </button>
+            </form>
+          </div>
         </div>
-        <button id="closePopup">Close</button>
+        <button class="cls-btn" id="closePopup">Close</button>
+      </div>
     </div>
-</div>
 
-<script>
-    const path = window.location.pathname;
-    const parts = path.split("/");
-    const productId = parts[parts.length - 1];
+    <script>
+      const path = window.location.pathname;
+      const parts = path.split("/");
+      const productId = parts[parts.length - 1];
 
-    let currentProduct = null;
-    let subtotal = 0;
-    fetch(`/api/products/${productId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Lỗi tải sản phẩm");
-            }
-            return response.json();
+      let currentProduct = null;
+      let subtotal = 0;
+      fetch(`/api/products/${productId}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Lỗi tải sản phẩm");
+          }
+          return response.json();
         })
-        .then(product => {
-            currentProduct = product;
-            document.getElementById("product-img").src = product.imageUrl;
-            document.getElementById("product-name").textContent = product.name;
-            document.getElementById("product-price").textContent = `${product.price.toLocaleString('vi-VN')} VND`;
-            const formattedDescription = product.description.replace(/\n/g, "<br>");
-            document.getElementById("product-des").innerHTML = formattedDescription;
+        .then((product) => {
+          currentProduct = product;
+          document.getElementById("product-img").src = product.imageUrl;
+          document.getElementById("product-name").textContent = product.name;
+          document.getElementById(
+            "product-price"
+          ).textContent = `${product.price.toLocaleString("vi-VN")} VND`;
+          const formattedDescription = product.description.replace(
+            /\n/g,
+            "<br>"
+          );
+          document.getElementById("product-des").innerHTML =
+            formattedDescription;
         })
-        .catch(error => {
-            console.error("Lỗi:", error);
+        .catch((error) => {
+          console.error("Lỗi:", error);
         });
 
-    // Hiển thị popup khi nhấn "Add to Cart"
-    document.querySelector(".add-to-cart").addEventListener("click", () => {
+      // Hiển thị popup khi nhấn "Add to Cart"
+      document.querySelector(".add-to-cart").addEventListener("click", () => {
         if (!currentProduct) {
-            alert("Sản phẩm chưa được tải. Vui lòng thử lại.");
-            return;
+          alert("Sản phẩm chưa được tải. Vui lòng thử lại.");
+          return;
         }
 
         const cartItemsContainer = document.getElementById("cart_items");
@@ -207,67 +253,73 @@
         subtotal += currentProduct.price * quantity;
         cartItemsContainer.innerHTML += `
         <div>
-            <strong>${currentProduct.name}</strong> - ${quantity} x ${currentProduct.price.toLocaleString('vi-VN')} VND
+            <strong>${
+              currentProduct.name
+            }</strong> - ${quantity} x ${currentProduct.price.toLocaleString(
+          "vi-VN"
+        )} VND
         </div>
     `;
 
-        document.getElementById("subtotal").textContent = `Subtotal: ${subtotal.toLocaleString('vi-VN')} VND`;
+        document.getElementById(
+          "subtotal"
+        ).textContent = `Subtotal: ${subtotal.toLocaleString("vi-VN")} VND`;
 
         document.getElementById("popupOverlay").style.display = "flex";
-    });
+      });
 
-
-    document.getElementById("closePopup").addEventListener("click", () => {
+      document.getElementById("closePopup").addEventListener("click", () => {
         document.getElementById("popupOverlay").style.display = "none";
-    });
+      });
 
-
-    const checkoutBtn = document.querySelector('.checkout-btn');
-    checkoutBtn.addEventListener('click', function (event) {
+      const checkoutBtn = document.querySelector(".checkout-btn");
+      checkoutBtn.addEventListener("click", function (event) {
         event.preventDefault();
 
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
-        const address = document.getElementById('address').value;
-        const note = document.getElementById('note').value;
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const address = document.getElementById("address").value;
+        const note = document.getElementById("note").value;
         const total = subtotal;
 
-        const productWithQuantity = [{
+        const productWithQuantity = [
+          {
             productName: currentProduct.name,
-            quantity: document.getElementById("quantity-select").value
-        }];
+            quantity: document.getElementById("quantity-select").value,
+          },
+        ];
 
-
-        fetch('/api/cart/checkout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: name,
-                phone: phone,
-                address: address,
-                products: productWithQuantity,
-                time: new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' }),
-                note: note,
-                total: total
+        fetch("/api/cart/checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            phone: phone,
+            address: address,
+            products: productWithQuantity,
+            time: new Date().toLocaleString("en-US", {
+              timeZone: "Asia/Ho_Chi_Minh",
             }),
+            note: note,
+            total: total,
+          }),
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Mạng bị lỗi!');
-                }
-                alert("Đặt hàng thành công !!!");
-                document.getElementById("popupOverlay").style.display = "none";
-            })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Mạng bị lỗi!");
+            }
+            alert("Đặt hàng thành công !!!");
+            document.getElementById("popupOverlay").style.display = "none";
+          })
 
-            .catch(error => {
-                console.error("Error:", error);
-                alert("Có lỗi xảy ra khi thanh toán!" + error.message);
-            });
-    });
-</script>
-
-</body>
-<footer th:insert="asset :: footer"></footer>
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Có lỗi xảy ra khi thanh toán!" + error.message);
+          });
+      });
+    </script>
+  </body>
+  <footer th:insert="asset :: footer"></footer>
 </html>

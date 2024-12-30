@@ -44,134 +44,147 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const currentPath = window.location.pathname;
-        let text_header = 'SHOP';
-        let apiUrl;
+    document.addEventListener("DOMContentLoaded", function () {
+      const currentPath = window.location.pathname;
+      const container = document.getElementById("product-container");
+      const textHeader = document.getElementById("text-header");
+      const searchForm = document.querySelector("form#searchForm"); // Form từ navbar
+      const searchInput = document.querySelector("input#searchInput"); // Input từ navbar
+      let text_header = "SHOP";
+      let apiUrl;
 
-        const  parts = currentPath.split("/");
+      // Xử lý đường dẫn và danh mục
+      const parts = currentPath.split("/");
+      const category = parts[parts.length - 1];
 
-        const category = parts[parts.length - 1];
-        text_header = category.replace(/_/g, ' ').toUpperCase();
+      if (currentPath === "/shop") {
+        apiUrl = "/api/products";
+      } else {
+        apiUrl = `/api/products/shop/${category}`;
+        text_header = category.replace(/_/g, " ").toUpperCase();
+      }
 
+      // Gửi yêu cầu lấy dữ liệu từ API
+      function fetchProducts(url) {
+        fetch(url)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to fetch products!");
+            }
+            return response.json();
+          })
+          .then((products) => {
+            container.innerHTML = ""; // Xóa sản phẩm cũ
+            textHeader.textContent = text_header;
 
-        if(currentPath === "/shop"){
-            apiUrl = '/api/products';
-        }
-        else{
-            apiUrl = `/api/products/shop/${category}`;
-        }
+            // Hiển thị sản phẩm
+            if (products.length === 0) {
+              container.innerHTML = `<p class="text-center">No products found in this category.</p>`;
+              return;
+            }
 
-        fetch(apiUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Mạng bị lỗi!');
-                }
-                return response.json();
-            })
-            .then(products => {
-                const container = document.getElementById('product-container');
+            products.forEach((product) => {
+              const productCard = document.createElement("div");
+              productCard.classList.add("col-md-4", "mb-4");
 
-                // Cập nhật text header
-                document.getElementById('text-header').textContent = text_header;
+              // Tạo giao diện sản phẩm
+              if (product.quantity > 0) {
+                productCard.innerHTML = `
+                      <div class="card h-100 shadow-sm">
+                          <img src="${
+                            product.imageUrl
+                          }" class="card-img-top" alt="${product.name}">
+                          <div class="card-body">
+                              <h5 class="card-title">${product.name}</h5>
+                              <p class="card-text">${product.price.toLocaleString(
+                                "vi-VN"
+                              )} VND</p>
+                          </div>
+                          <div class="card-footer bg-white">
+                              <div class="row">
+                                  <button class="btn w-50 btn-success btn-quick-add quick-add">Quick Add</button>
+                                  <button class="btn w-50 btn-warning btn-buy-now buy-now">Buy Now</button>
+                              </div>
+                          </div>
+                      </div>
+                  `;
 
-                // Thêm các sản phẩm vào container
-                products
-                    .filter(product => product.imageUrl && product.imageUrl.trim() !== '')
-                    .forEach(product => {
-                        const productCard = document.createElement('div');
-                        productCard.classList.add('col-md-4', 'mb-4');
-                        if(product.quantity > 0){
-                            productCard.innerHTML = `
-                                <div class="card h-100 shadow-sm"> <!-- Bootstrap card -->
-                                    <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${product.name}</h5>
-                                        <p class="card-text">${product.price.toLocaleString('vi-VN')} VND</p>
-                                    </div>
-                                    <div class="card-footer bg-white">
-                                        <div class="row">
-                                            <button id="quickAdd" class="btn w-25" style="background-color: #b5b569">Quick Add</button>
-                                            <button id="BuyNow" class="btn w-75" style="background-color: #656522">Buy Now</button>
-                                        </div>
+                // Xử lý sự kiện Quick Add và Buy Now
+                productCard
+                  .querySelector(".buy-now")
+                  .addEventListener("click", () => {
+                    window.location.href = `/buy/${product.id}`;
+                  });
 
+                productCard
+                  .querySelector(".quick-add")
+                  .addEventListener("click", () => {
+                    const formData = new FormData();
+                    formData.append("product_id", product.id);
+                    formData.append("quantity", 1);
 
-
-                                    </div>
-                                </div>
-                    `;
-                            const formData = new FormData();
-                            formData.append("product_id", product.id);
-                            formData.append("quantity", 1);
-
-                            productCard.querySelector('#BuyNow').addEventListener('click', function () {
-                                window.location.href = `/buy/${product.id}`;
-                            });
-                            productCard.querySelector('#quickAdd').addEventListener('click', function () {
-                                fetch(`/api/cart/add`, {
-                                    method: 'POST',
-                                    body: formData
-                                })
-                                    .then(response => {
-                                        if (!response.ok) {
-                                            if (response.status === 401) { // 401: Unauthorized
-                                                throw new Error('Vui lòng đăng nhập để thêm vào giỏ hàng!');
-                                            }
-                                            throw new Error('Thêm vào giỏ hàng thất bại!Vui lòng đăng nhập!!!');
-                                        }
-
-                                        alert("Them thanh cong!!");
-                                    })
-
-                                    .catch(error => {
-                                        alert(error.message);
-                                        if (error.message.includes('thất bại')) {
-                                            window.location.href = '/login';
-                                        }
-
-                                    });
-                            });
-
-
-                            // productCard.querySelector('#quickAdd').addEventListener('click', function () {
-                            //     window.location.href = `/api/products/shop/${product.id}`;
-                            // });
-                            // document.getElementById('quickAdd').addEventListener('click', function () {
-                            //         fetch(`/api/products/shop/${product.id}`)
-                            //             .then(response => {
-                            //                 if (!response.ok) {
-                            //                     throw new Error('Mạng bị lỗi!');
-                            //                 }
-                            //                 return response.json();
-                            //             })
-
-                            //
-                            //      });
-
+                    fetch("/api/cart/add", {
+                      method: "POST",
+                      body: formData,
+                    })
+                      .then((response) => {
+                        if (!response.ok) {
+                          if (response.status === 401) {
+                            throw new Error(
+                              "Please log in to add products to the cart."
+                            );
+                          }
+                          throw new Error("Failed to add product to cart.");
                         }
-                        else{
-                            productCard.innerHTML = `
-                                <div class="card h-100 shadow-sm"> <!-- Bootstrap card -->
-                                    <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${product.name}</h5>
-                                        <p class="card-text">${product.price.toLocaleString('vi-VN')} VND</p>
-                                    </div>
-                                    <div class="card-footer bg-white">
-                                        <button class="btn w-100 btn-disabled" disabled style="background-color: #ccc; color: #fff;">Sale Out</button>
-                                    </div>
-                                </div>
-                    `;
+                        alert("Product added to cart successfully!");
+                      })
+                      .catch((error) => {
+                        alert(error.message);
+                        if (error.message.includes("Failed")) {
+                          window.location.href = "/login";
                         }
-                        container.appendChild(productCard);
-                    });
-            })
-            .catch(error => {
-                console.error('Lỗi khi tải dữ liệu sản phẩm:', error);
+                      });
+                  });
+              } else {
+                productCard.innerHTML = `
+                      <div class="card h-100 shadow-sm">
+                          <img src="${
+                            product.imageUrl
+                          }" class="card-img-top" alt="${product.name}">
+                          <div class="card-body">
+                              <h5 class="card-title">${product.name}</h5>
+                              <p class="card-text">${product.price.toLocaleString(
+                                "vi-VN"
+                              )} VND</p>
+                          </div>
+                          <div class="card-footer bg-white">
+                              <button class="btn w-100 btn-disabled" disabled style="background-color: #ccc;">Sale Out</button>
+                          </div>
+                      </div>
+                  `;
+              }
+              container.appendChild(productCard);
             });
+          })
+          .catch((error) => {
+            console.error("Error fetching products:", error);
+          });
+      }
+
+      // Lấy sản phẩm ban đầu
+      fetchProducts(apiUrl);
+
+      // Xử lý tìm kiếm sản phẩm từ form tìm kiếm của navbar
+      searchForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const query = searchInput.value.trim();
+        if (query) {
+          fetchProducts(
+            `/api/products/search?query=${encodeURIComponent(query)}`
+          );
+        }
+      });
     });
-
-
 </script>
 
 <div th:insert="asset :: footer"></div>
