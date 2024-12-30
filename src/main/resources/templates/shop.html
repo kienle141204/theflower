@@ -83,7 +83,7 @@
               return;
             }
 
-            products.forEach((product) => {
+            products.filter(product => product.imageUrl && product.imageUrl.trim() !== '').forEach((product) => {
               const productCard = document.createElement("div");
               productCard.classList.add("col-md-4", "mb-4");
 

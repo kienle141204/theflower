@@ -308,15 +308,17 @@
         })
           .then((response) => {
             if (!response.ok) {
-              throw new Error("Mạng bị lỗi!");
+              throw new Error("error!!!");
             }
-            alert("Đặt hàng thành công !!!");
+            alert("Order completed !!!");
             document.getElementById("popupOverlay").style.display = "none";
           })
 
           .catch((error) => {
-            console.error("Error:", error);
-            alert("Có lỗi xảy ra khi thanh toán!" + error.message);
+            alert(error.message);
+            if (error.message.includes("error")) {
+              window.location.href = "/login";
+            }
           });
       });
     </script>
