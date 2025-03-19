@@ -69,6 +69,9 @@ public class CartRepository {
     }
 
 
-
+    public void clearC(Integer userId) {
+        String sql = "DELETE FROM cart_item WHERE cart_id = ?";
+        jdbcTemplate.update(sql, userId);
+    }
 }
 
